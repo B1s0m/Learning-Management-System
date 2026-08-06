@@ -1,40 +1,35 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const enrollmentSchema = new mongoose.Schema(
   {
     student: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: true
     },
 
     course: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Course",
-      required: true,
+      required: true
     },
 
     status: {
       type: String,
       enum: ["pending", "accepted", "rejected"],
-      default: "pending",
+      default: "pending"
     },
 
     reviewedBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      default: null,
+      ref: "User"
     },
 
     reviewedAt: {
-      type: Date,
-      default: null,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
+      type: Date
+    }
+  },{timestamps: true}
+)
 
-
-module.exports = mongoose.model("Enrollment", enrollmentSchema);
+let Enrollment = mongoose.model("Enrollment", enrollmentSchema)
+module.exports = Enrollment

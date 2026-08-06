@@ -1,36 +1,31 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const reviewSchema = new mongoose.Schema(
   {
     student: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: true
     },
 
     course: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Course",
-      required: true,
+      required: true
     },
 
     rating: {
       type: Number,
       required: true,
       min: 1,
-      max: 5,
+      max: 5
     },
 
     comment: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
+      type: String
+    }
+  },{timestamps: true}
+)
 
 
 
