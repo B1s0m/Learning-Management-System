@@ -7,7 +7,7 @@
 * As a guest, I want to search and filter courses so that I can find courses more easily.
 * As a guest, I want to create an account so that I can use the platform.
 * As a guest, I want to sign in so that I can access my dashboard.
-# hello
+
 ## Student
 
 ### Courses and Enrollment
