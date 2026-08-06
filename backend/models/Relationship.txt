@@ -1,0 +1,21 @@
+One Instructor → Many Courses
+
+One Category → Many Courses
+
+One Course → Many Lessons
+
+One Course → Many Assignments
+
+One Student → Many Enrollment Requests
+
+One Course → Many Enrollment Requests
+
+One Assignment → Many Submissions
+
+One Student → Many Submissions
+
+One Course → Many Reviews
+
+One Student → Many Reviews
+
+One Student → Many Favorite Courses
