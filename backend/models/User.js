@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
       required: true
     },
 
-      email: {
+    email: {
       type: String,
       required: true,
       unique: true,
@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema(
     },
 
     expertise: {
-      type: String
+      type: [String]
     },
 
     isActive: {
@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema(
 
 userSchema.set("toJSON", {
   transform: (document, returnedObject) => {
-    delete returnedObject.hashedPassword;
+    delete returnedObject.hashedPassword
   },
 })
 
