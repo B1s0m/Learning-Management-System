@@ -16,11 +16,15 @@
 * As a student, I want to search for courses by title or instructor so that I can quickly find a specific course.
 * As a student, I want to filter courses by category or level so that I can find relevant courses.
 * As a student, I want to view course details so that I can understand the course content and requirements.
-* As a student, I want to request enrollment in a course so that I can ask the instructor for permission to join.
-* As a student, I want to view my enrollment request status so that I know whether it is pending, accepted, or rejected.
-* As a student, I want to cancel a pending enrollment request so that I can withdraw my request.
-* As a student, I want to access course lessons only after my request is accepted.
-* As a student, I want accepted courses to appear in My Courses so that I can access them easily.
+* As a student, I want to view the course price and discount so that I know how much the course costs.
+* As a student, I want to add a course to my cart so that I can purchase it later.
+* As a student, I want to view the courses in my cart.
+* As a student, I want to remove a course from my cart.
+* As a student, I want to view the total price of my cart.
+* As a student, I want to purchase courses in my cart so that I can access them.
+* As a student, I want to enter a valid access code so that I can join a course without purchasing it.
+* As a student, I want my joined courses to appear in My Courses.
+
 
 <!-- ### Lessons and Materials -->
 
@@ -33,7 +37,9 @@
 
 * As a student, I want to view course assignments so that I know what work I need to complete.
 * As a student, I want to view assignment due dates so that I can submit my work on time.
-* As a student, I want to upload my assignment as a PDF file so that the instructor can review it.
+* As a student, I want to answer text questions.
+* As a student, I want to answer multiple-choice questions.
+* As a student, I want to upload a file when a question requires a file submission.
 * As a student, I want to edit or replace my submission before the due date so that I can correct my work.
 * As a student, I want to view whether an assignment is upcoming, due soon, or overdue.
 * As a student, I want to view my grade and instructor feedback so that I can understand my performance.
@@ -67,18 +73,15 @@
 * As an instructor, I want to create a course so that I can share educational content.
 * As an instructor, I want to upload an image for my course so that it has a clear visual identity.
 * As an instructor, I want to view all courses I created so that I can manage them.
+* As an instructor, I want to set a price for my course.
+* As an instructor, I want to add or update a discount for my course.
 * As an instructor, I want to edit my course information so that the details remain accurate.
 * As an instructor, I want to delete my course so that I can remove courses that are no longer needed.
 * As an instructor, I want only myself to edit or delete my courses.
-
-<!-- ### Enrollment Management -->
-
-* As an instructor, I want to view pending enrollment requests for my courses.
-* As an instructor, I want to accept an enrollment request so that the student can access the course.
-* As an instructor, I want to reject an enrollment request so that the student cannot access the course.
-* As an instructor, I want to view all accepted students in my courses.
+* As an instructor, I want to create an access code for my course so that selected students can join without purchasing it.
+* As an instructor, I want to update or disable my course access code.
+* As an instructor, I want to view all students who have access to my course.
 * As an instructor, I want to remove a student from my course when necessary.
-* As an instructor, I want to manage requests only for courses that I created.
 
 <!-- ### Lesson Management -->
 
@@ -86,8 +89,13 @@
 * As an instructor, I want to edit lessons so that I can improve or correct them.
 * As an instructor, I want to delete lessons so that I can remove outdated content.
 * As an instructor, I want to add video links to lessons.
-* As an instructor, I want to upload PDF materials for students.
-* As an instructor, I want to replace or delete uploaded PDF files.
+* As an instructor, I want to add multiple questions to an assignment.
+* As an instructor, I want to create text, multiple-choice, and file-upload questions.
+* As an instructor, I want to assign marks to each question.
+* As an instructor, I want to add answer options to multiple-choice questions.
+* As an instructor, I want to specify the correct answer for multiple-choice questions.
+* As an instructor, I want to grade each student's answer.
+* As an instructor, I want to provide feedback for student answers.
 
 <!-- ### Assignment Management -->
 
@@ -109,14 +117,13 @@
 
 <!-- ### Dashboard and Statistics -->
 
-* As an instructor, I want to view the total number of courses I created.
-* As an instructor, I want to view the total number of enrolled students.
-* As an instructor, I want to view the number of pending enrollment requests.
+* As an instructor, I want to view the total number of students in my courses.
+* As an instructor, I want to view the number of students who joined each course.
 * As an instructor, I want to view the number of assignments and submissions.
 * As an instructor, I want to view the number of ungraded submissions.
 * As an instructor, I want to view the average rating of my courses.
-* As an instructor, I want to compare enrollment statistics between courses.
-* As an instructor, I want to view recent requests and submissions from my dashboard.
+* As an instructor, I want to view recent student submissions.
+
 <!-- 
 ### Profile
 
@@ -152,8 +159,6 @@
 * As an admin, I want to view platform statistics so that I can monitor system activity.
 * As an admin, I want to view the total number of users, instructors, and students.
 * As an admin, I want to view the total number of courses.
-* As an admin, I want to view the total number of enrollment requests.
-* As an admin, I want to view the total number of completed enrollments.
 * As an admin, I want to view the total number of assignments and submissions.
 
 <!-- ### Review Management -->
