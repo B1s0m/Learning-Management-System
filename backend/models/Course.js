@@ -38,8 +38,32 @@ const courseSchema = new mongoose.Schema(
     isPublished: {
       type: Boolean,
       default: false
-    }
-  },{timestamps: true}
+    },
+
+    price: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
+    discount: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 100
+    },
+    accessCode: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+
+    accessCodeActive: {
+      type: Boolean,
+      default: false,
+    },
+    
+
+  }, { timestamps: true }
 )
 
 let Course = mongoose.model("Course", courseSchema)

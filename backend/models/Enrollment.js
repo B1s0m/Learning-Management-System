@@ -12,22 +12,18 @@ const enrollmentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Course",
       required: true
-    },
-
-    status: {
-      type: String,
-      enum: ["pending", "accepted", "rejected"],
-      default: "pending"
-    },
-
-    reviewedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
-    },
-
-    reviewedAt: {
-      type: Date
     }
+
+     ,accessType: {
+       type: String,
+      enum: ["purchase", "code"],
+      required: true,
+    },
+      amount: {
+      type: Number,
+      required: true,
+      min: 0,
+    },
   },{timestamps: true}
 )
 
