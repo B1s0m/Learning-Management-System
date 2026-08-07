@@ -1,5 +1,86 @@
 const mongoose = require("mongoose")
 
+// const assignmentSchema = new mongoose.Schema(
+//   {
+//     title: {
+//       type: String,
+//       required: true,
+//       trim: true
+//     },
+
+//     instructions: {
+//       type: String
+//     },
+
+//     instructionPdf: {
+//       type: String,
+//       default: ""
+//     },
+
+//     dueDate: {
+//       type: Date,
+//       required: true
+//     },
+
+//     totalMarks: {
+//       type: Number,
+//       required: true,
+//       min: 0
+//     },
+
+//     course: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: "Course",
+//       required: true
+//     },
+
+//     createdBy: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: "User",
+//       required: true
+//     },
+//   },{timestamps: true}
+// )
+
+// let Assignment = mongoose.model("Assignment", assignmentSchema)
+
+// module.exports = Assignment
+
+
+/////////////////////////////////////
+///  this for question idea  
+///If we can't, we'll just put the file.
+/////////////////////////////////////
+
+const questionSchema = new mongoose.Schema({
+  questionText: {
+    type: String,
+    required: true,
+  },
+
+  questionType: {
+    type: String,
+    enum: ["text", "multiple-choice", "file"],
+    required: true,
+  },
+
+  options: [
+    {
+      type: String,
+    },
+  ],
+
+  correctAnswer: {
+    type: String,
+  },
+
+  marks: {
+    type: Number,
+    required: true,
+    min: 1,
+  },
+});
+
 const assignmentSchema = new mongoose.Schema(
   {
     title: {
@@ -12,36 +93,25 @@ const assignmentSchema = new mongoose.Schema(
       type: String
     },
 
-    instructionPdf: {
-      type: String,
-      default: ""
-    },
+    questions: [questionSchema],
 
     dueDate: {
       type: Date,
       required: true
     },
 
-    totalMarks: {
-      type: Number,
-      required: true,
-      min: 0
-    },
 
-    course: {
+    lesson: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Course",
+      ref: "Lesson",
       required: true
     },
 
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true
-    },
-  },{timestamps: true}
+  }, { timestamps: true }
 )
 
 let Assignment = mongoose.model("Assignment", assignmentSchema)
 
 module.exports = Assignment
+
+
