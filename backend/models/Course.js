@@ -7,6 +7,11 @@ const courseSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true
+    },
 
     description: {
       type: String,
@@ -29,11 +34,6 @@ const courseSchema = new mongoose.Schema(
       required: true
     },
 
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
-      required: true
-    },
 
     isPublished: {
       type: Boolean,

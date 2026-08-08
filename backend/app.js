@@ -9,6 +9,7 @@ const cors = require('cors')
 const authRoutes = require('./routes/auth.routes')
 const adminRoutes=require("./routes/admin.routes")
 const categoriesRoutes=require("./routes/categories.routes")
+const coursesRoutes=require("./routes/courses.routes")
 
 // Middleware
 app.use(
@@ -25,6 +26,7 @@ app.use(morgan('dev'))
 app.use('/auth',authRoutes)
 app.use('/',adminRoutes)
 app.use('/',categoriesRoutes)
+app.use('/',coursesRoutes)
 
 
 
