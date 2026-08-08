@@ -10,6 +10,7 @@ const authRoutes = require('./routes/auth.routes')
 const adminRoutes=require("./routes/admin.routes")
 const categoriesRoutes=require("./routes/categories.routes")
 const coursesRoutes=require("./routes/courses.routes")
+const lessonRoutes=require("./routes/lesson.routes")
 
 // Middleware
 app.use(
@@ -27,6 +28,7 @@ app.use('/auth',authRoutes)
 app.use('/',adminRoutes)
 app.use('/',categoriesRoutes)
 app.use('/',coursesRoutes)
+app.use('/',lessonRoutes)
 
 
 

@@ -1,5 +1,4 @@
 const Course = require("../models/Course");
-const { createCategory } = require("./Category.controller");
 const uploadToCloudinary = require("./uploadToCloudinary");
 const cloudinary = require("../config/cloudinary");
 

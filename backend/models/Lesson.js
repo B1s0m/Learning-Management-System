@@ -26,7 +26,7 @@ const lessonSchema = new mongoose.Schema(
       required: true
     },
 
-    createdBy: {
+    creactedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true
@@ -34,4 +34,5 @@ const lessonSchema = new mongoose.Schema(
   },{timestamps: true}
 )
 
-module.exports = mongoose.model("Lesson", lessonSchema)
+const Lesson=  mongoose.model("Lesson", lessonSchema)
+module.exports =Lesson
