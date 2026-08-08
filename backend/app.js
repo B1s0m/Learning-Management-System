@@ -7,7 +7,8 @@ const cors = require('cors')
 
 // Routes Import
 const authRoutes = require('./routes/auth.routes')
-const adminRoutes=require("./routes/admin.controller")
+const adminRoutes=require("./routes/admin.routes")
+const categoriesRoutes=require("./routes/categories.routes")
 
 // Middleware
 app.use(
@@ -23,6 +24,7 @@ app.use(morgan('dev'))
 // Routes
 app.use('/auth',authRoutes)
 app.use('/',adminRoutes)
+app.use('/',categoriesRoutes)
 
 
 
