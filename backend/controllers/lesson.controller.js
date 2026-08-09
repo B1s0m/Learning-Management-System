@@ -11,26 +11,26 @@ async function createLesson(req, res) {
         const { title, content, creactedBy, course } = req.body
 
         let videoUrl = null;
-        const video=  req.files.videoUrl[0]  
+        const video = req.files.videoUrl[0]
         if (video) {
             const result = await uploadToCloudinary({
                 fileBuffer: req.files.videoUrl[0].buffer,
-                 type: "video",
-                  foldername: "lms/lesson/video",
+                type: "video",
+                foldername: "lms/lesson/video",
                 //   filename:null
             }
             );
             videoUrl = result.secure_url;
 
         }
-        let pdfFile = null;
-        const pdf =req.files.pdfFile[0]
+        let = null;
+        const pdf = req.files.pdfFile[0]
         if (pdf) {
             const result = await uploadToCloudinary({
                 fileBuffer: req.files.pdfFile[0].buffer,
-                 type: "raw",
-                  foldername: "lms/lesson/file",
-                   filename: req.files.pdfFile[0].originalname
+                type: "raw",
+                foldername: "lms/lesson/file",
+                filename: req.files.pdfFile[0].originalname
             }
             );
             pdfFile = result.secure_url;
@@ -46,7 +46,7 @@ async function createLesson(req, res) {
         // console.log(req.files);
 
 
-        const createdLesson = await Lesson.create({ title, content, creactedBy,course,pdfFile,videoUrl  })
+        const createdLesson = await Lesson.create({ title, content, creactedBy, course, pdfFile, videoUrl })
         console.log(req.body);
         res.status(201).json(createdLesson);
     } catch (error) {
@@ -83,8 +83,16 @@ async function getLessonById(req, res) {
 
 async function deleteLessonById(req, res) {
     try {
-
-        const deleteLesson = await Lesson.findByIdAndDelete(req.params.id);
+            
+         const id = req.params.id
+        const creactedBy = req.user._id
+        const findLesson = await Lesson.findById(id)
+        if (creactedBy != String(findLesson.creactedBy)) {
+            return res.status(403).json({
+                message: "You are not authorized to update this Lesson",
+            });
+        }
+        const deleteLesson = await Lesson.findByIdAndDelete(id);
         res.json(deleteLesson);
     } catch (error) {
         console.log(error);
@@ -94,7 +102,7 @@ async function deleteLessonById(req, res) {
 
 
 // this function get path file
-function getPathFromUrl(Path) {
+function getPathFromUrlvideo(Path) {
     const parts = Path.split("/");
 
     // this for get last string in aray (filename.ext) 
@@ -103,53 +111,79 @@ function getPathFromUrl(Path) {
     // remove Extension 
     const fileNameWithoutExt = fileName.split(".")[0];
 
-    return `lms/courses/${fileNameWithoutExt}`;
+    return `lms/lesson/video"${fileNameWithoutExt}`;
+}
+function getPathFromUrlpdf(Path) {
+    const parts = Path.split("/");
+
+    // this for get last string in aray (filename.ext) 
+    const fileName = parts[parts.length - 1];
+
+    // remove Extension 
+    const fileNameWithoutExt = fileName.split(".")[0];
+
+    return `lms/lesson/file"${fileNameWithoutExt}`;
 }
 
 
 async function updateLessonById(req, res) {
     try {
         const id = req.params.id
-        const instructorid = req.user._id
+        const creactedBy = req.user._id
         // console.log(instruct orid)
         const findLesson = await Lesson.findById(id)
         // console.log(req.body)
-        if (String(instructorid) != String(findLesson.instructor)) {
+        if (creactedBy != String(findLesson.creactedBy)) {
             return res.status(403).json({
                 message: "You are not authorized to update this Lesson",
             });
         }
+        //////  this for filepdf
+        let pdfFile = findLesson.videoUrl;
+        const pdf = req.files.pdfFile[0]
 
-        let image = findLesson.image;
-
-        if (req.file) {
+        if (pdf) {
             const result = await uploadToCloudinary({
-                fileBuffer: req.file.buffer, type: "image", foldername: "lms/courses"
+                fileBuffer: pdf.buffer, type: "raw", foldername: "lms/lesson/file"
             }
             );
 
 
 
-            if (findLesson.image) {
-                const oldimagefilename = getPathFromUrl(findLesson.image)
+            if (pdfFile) {
+                const oldimagefilename = getPathFromUrlpdf(pdfFile)
                 await cloudinary.uploader.destroy(oldimagefilename)
             }
 
-            image = result.secure_url;
+            pdfFile = result.secure_url;
 
         }
-        // console.log(req.file);
+        //////  this for videoURL
+        let videoUrl = findLesson.videoUrl;
+        const video = req.files.videoUrl[0]
+
+        if (video) {
+            const result = await uploadToCloudinary({
+                fileBuffer: video.buffer, type: "video", foldername: "lms/lesson/video"
+            }
+            );
 
 
-        const updatedLesson = await Lesson.findByIdAndUpdate(req.params.id, {
-            title: req.body.title,
-            description: req.body.description,
-            price: req.body.price,
-            discount: req.body.discount,
-            level: req.body.level,
-            category: req.body.category,
-            image: image
-        }, { new: true });
+
+            if (videoUrl) {
+                const oldimagefilename = getPathFromUrlvideo(videoUrl)
+                await cloudinary.uploader.destroy(oldimagefilename)
+            }
+
+            videoUrl = result.secure_url;
+
+        }
+         const {title, content,} = req.body
+        const updatedLesson = await Lesson.findByIdAndUpdate(req.params.id, 
+            { title,
+              content,
+                pdfFile,
+                 videoUrl, }, { new: true });
         // console.log(updatedLesson)
         res.json(updatedLesson);
     } catch (error) {
@@ -163,5 +197,5 @@ async function updateLessonById(req, res) {
 
 
 module.exports = {
-    createLesson ,getAllLesson ,getLessonById ,deleteLessonById
+    createLesson, getAllLesson, getLessonById, deleteLessonById ,updateLessonById
 }

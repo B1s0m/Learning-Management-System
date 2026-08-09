@@ -106,7 +106,7 @@ const assignmentSchema = new mongoose.Schema(
       ref: "Lesson",
       required: true
     },
-
+  
   }, { timestamps: true }
 )
 
