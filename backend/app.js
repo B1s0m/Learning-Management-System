@@ -7,7 +7,7 @@ const cors = require('cors')
 
 // Routes Import
 const authRoutes = require('./routes/auth.routes')
-const adminRoutes=require("./routes/admin.routes")
+const userRoutes=require("./routes/user.routers")
 const categoriesRoutes=require("./routes/categories.routes")
 const coursesRoutes=require("./routes/courses.routes")
 const lessonRoutes=require("./routes/lesson.routes")
@@ -25,7 +25,7 @@ app.use(morgan('dev'))
 
 // Routes
 app.use('/auth',authRoutes)
-app.use('/',adminRoutes)
+app.use('/users',userRoutes)
 app.use('/',categoriesRoutes)
 app.use('/',coursesRoutes)
 app.use('/',lessonRoutes)

@@ -71,7 +71,7 @@ async function signIn(req, res) {
     }
 
     // Construct the payload
-    const payload = { username: user.username, _id: user._id }
+    const payload = { username: user.username, _id: user._id, role: user.role }
 
 
     const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {
