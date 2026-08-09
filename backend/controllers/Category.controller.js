@@ -43,7 +43,7 @@ async function getCategorytById(req, res) {
 async function updateCategoryById(req, res) {
     try {
 
-        const updatedCategory = await Category.findByIdAndUpdate(req.params.id, req.body);
+        const updatedCategory = await Category.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.json(updatedCategory);
     } catch (error) {
         console.log(error);

@@ -79,13 +79,13 @@ async function updateCourseById(req, res) {
         // console.log(instruct orid)
         const findCourse = await Course.findById(id)
         // console.log(req.body)
-        if (String(instructorid) != String(findCourse.instructor)) {
+        if (instructorid != String(findCourse.instructor)) {
             return res.status(403).json({
                 message: "You are not authorized to update this course",
             });
         }
 
-        let image = findCourse.image;
+        let image = findCourse.image
 
         if (req.file) {
             const result = await uploadToCloudinary({
@@ -94,9 +94,9 @@ async function updateCourseById(req, res) {
             );
 
 
-
-            if (findCourse.image) {
-                const oldimagefilename = getPathFromUrl(findCourse.image)
+// ليش findCourse.image ومو image?
+            if (image) {
+                const oldimagefilename = getPathFromUrl(image)
                 await cloudinary.uploader.destroy(oldimagefilename)
             }
 
@@ -105,18 +105,18 @@ async function updateCourseById(req, res) {
         }
         // console.log(req.file);
 
-
+const {title, description, price, discount, level, category} = req.body
         const updatedCourse = await Course.findByIdAndUpdate(req.params.id, {
-            title: req.body.title,
-            description: req.body.description,
-            price: req.body.price,
-            discount: req.body.discount,
-            level: req.body.level,
-            category: req.body.category,
-            image: image
+            title,
+            description,
+            price: Number(price),
+            discount: Number(discount),
+            level,
+            category,
+            image
         }, { new: true });
         // console.log(updatedCourse)
-        res.json(updatedCourse);
+        res.status(200).json(updatedCourse);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error })
@@ -126,7 +126,6 @@ async function updateCourseById(req, res) {
 
 async function deleteCourseById(req, res) {
     try {
-
         const deleteCoursey = await Course.findByIdAndDelete(req.params.id);
         res.json(deleteCoursey);
     } catch (error) {
