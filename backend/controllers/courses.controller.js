@@ -94,7 +94,6 @@ async function updateCourseById(req, res) {
             );
 
 
-// ليش findCourse.image ومو image?
             if (image) {
                 const oldimagefilename = getPathFromUrl(image)
                 await cloudinary.uploader.destroy(oldimagefilename)
@@ -126,7 +125,17 @@ const {title, description, price, discount, level, category} = req.body
 
 async function deleteCourseById(req, res) {
     try {
-        const deleteCoursey = await Course.findByIdAndDelete(req.params.id);
+          const id = req.params.id
+        const instructorid = req.user._id
+        // console.log(instruct orid)
+        const findCourse = await Course.findById(id)
+        // console.log(req.body)
+        if (instructorid != String(findCourse.instructor)) {
+            return res.status(403).json({
+                message: "You are not authorized to delete this course",
+            });
+        }
+        const deleteCoursey = await Course.findByIdAndDelete(id);
         res.json(deleteCoursey);
     } catch (error) {
         console.log(error);
