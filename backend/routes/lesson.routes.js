@@ -15,7 +15,10 @@ router.post("/lesson",   upload.fields([
     { name: "pdfFile", maxCount: 1 },
   ]),verifyToken,verifyRole.verifyInstructor,lesson.createLesson)
 
-// router.put("/lesson/:id",upload.single("image"),verifyToken,verifyRole.verifyInstructor,lesson.updateCourseById)
+router.put("/lesson/:id",upload.fields([
+    { name: "videoUrl", maxCount: 1 },
+    { name: "pdfFile", maxCount: 1 },
+  ]),verifyToken,verifyRole.verifyInstructor,lesson.updateLessonById)
 
 router.delete("/lesson/:id", verifyToken,verifyRole.verifyInstructor,lesson.deleteLessonById)
 

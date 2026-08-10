@@ -92,6 +92,9 @@ const assignmentSchema = new mongoose.Schema(
     instructions: {
       type: String
     },
+    instructionsFile: {
+      type: String,
+    },
 
     questions: [questionSchema],
 
