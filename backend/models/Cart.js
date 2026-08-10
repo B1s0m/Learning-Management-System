@@ -23,17 +23,9 @@ const cartSchema = new mongoose.Schema(
                     min: 0,
                 },
             },
-        ],
-
-        totalPrice: {
-            type: Number,
-            default: 0
-        },
-
+        ]
     },
-    {
-        timestamps: true,
-    }
+    {timestamps: true}
 );
 
 let Cart=mongoose.model("Cart", cartSchema);
