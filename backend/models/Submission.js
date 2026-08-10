@@ -106,12 +106,7 @@ const submissionSchema = new mongoose.Schema(
     submittedAt: {
       type: Date,
       default: Date.now,
-    },
-
-    gradedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
+    }
   },
   {
     timestamps: true,
