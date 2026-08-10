@@ -41,8 +41,7 @@ async function creatSubmission(req, res) {
             let createdSubmission = await Submission.create({
                 assignment: req.params.submissionID,
                 student: req.user._id,
-                answers: req.body.answers,
-                submittedAt: Date.now
+                answers: req.body.answers
             })
         } else {
             return res.status(403).json({ message: "You Are Not A Student!!" })
@@ -62,12 +61,14 @@ async function updateSubmissionById(req, res) {
         })
         if (req.user._id == String(thisSubmission.student) && thisSubmission.assignment.dueDate.gitTime() > Date.now.gitTime()) {
             let thisAnswers = req.body.answers
-            let updatedSubmission = await Submission.findByIdAndUpdate(req.params.id, { answers: [...answers, thisAnswers], submittedAt: Date.now }, { new: true })
+            let updatedSubmission = await Submission.findByIdAndUpdate(req.params.id, { answers: [...answers, thisAnswers] }, { new: true })
             return res.status(200).json(updatedSubmission)
         } else if (req.user._id == String(thisSubmission.assignment.lesson.creactedBy)) {
             let Marks = req.body.marksAwarded
+            let Feedback = req.body.feedback
             for (let i = 0; i < thisSubmission.answers.length; i++) {
                 thisSubmission.answers[i].marksAwarded = Marks[i]
+                thisSubmission.answers[i].feedback = Feedback[i]
             }
             thisSubmission.save()
             return res.status(200).json(thisSubmission)
