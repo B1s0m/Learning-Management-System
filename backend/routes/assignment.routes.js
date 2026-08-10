@@ -9,7 +9,7 @@ const upload=require("../middleware/upload")
 
 // router.get("/courses/:id",verifyToken,courses.getCourseById)
 
-router.post("/assignments/:lessonid", verifyToken,verifyRole.verifyInstructor,assignment.createassignment )
+router.post("/assignments/:lessonid",upload.single("instructionsFile"), verifyToken,verifyRole.verifyInstructor,assignment.createAssignment )
 
 // router.put("/courses/:id",upload.single("image"),verifyToken,verifyRole.verifyInstructor,courses.updateCourseById)
 

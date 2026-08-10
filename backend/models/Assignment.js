@@ -92,6 +92,9 @@ const assignmentSchema = new mongoose.Schema(
     instructions: {
       type: String
     },
+    instructionsFile: {
+      type: String,
+    },
 
     questions: [questionSchema],
 
@@ -106,7 +109,7 @@ const assignmentSchema = new mongoose.Schema(
       ref: "Lesson",
       required: true
     },
-  
+
   }, { timestamps: true }
 )
 

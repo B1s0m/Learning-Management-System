@@ -7,6 +7,7 @@ const cloudinary = require("../config/cloudinary");
 async function createLesson(req, res) {
 
     try {
+                 /// const course=req.params.couersid
         req.body.creactedBy = req.user._id
         const { title, content, creactedBy, course } = req.body
 
@@ -60,7 +61,7 @@ async function createLesson(req, res) {
 async function getAllLesson(req, res) {
 
     try {
-
+         /// const course=req.params.couersid
         const AllLesson = await Lesson.find()
         res.status(200).json(AllLesson);
     } catch (error) {
