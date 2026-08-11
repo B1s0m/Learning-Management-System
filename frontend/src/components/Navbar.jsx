@@ -9,7 +9,7 @@ function Navbar() {
       (<><button onClick={logout}>Sign Out</button>
       <Link to='/usersList'>Users List</Link>
         <Link to='/coursesList'>Corses List</Link>
-        <Link to=''>Catygories</Link>
+        <Link to='/ctegoriesList'>Catygories</Link>
       </>)
       :
       user && user.role == "student" ? 
