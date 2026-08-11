@@ -5,6 +5,14 @@ import SignupPage from "./pages/SignupPage";
 import Homepage from "./pages/Homepage";
 import SignInPage from "./pages/SigninPage";
 import Dashboard from "./pages/Dashboard";
+import UsersList from "./pages/UsersList";
+import UserDetails from "./pages/UserDetails";
+import EditUser from "./pages/EditUser";
+import CorsesList from "./pages/CorsesList";
+import CorseDetails from "./pages/CorseDetails";
+import CartPage from "./pages/CartPage";
+import LessonsPage from "./pages/LessonsPage";
+
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -17,7 +25,13 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/sign-up" element={<SignupPage />} />
         <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/usersList" element={<ProtectedRoute><UsersList /></ProtectedRoute>} />
+        <Route path="/userDetails/:id" element={<ProtectedRoute><UserDetails /></ProtectedRoute>} />
+        <Route path="/editUser/:id" element={<ProtectedRoute><EditUser /></ProtectedRoute>} />
+        <Route path="/coursesList" element={<CorsesList />} />
+        <Route path="/corseDetails/:id" element={<ProtectedRoute><CorseDetails /></ProtectedRoute>} />
+        <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
+        <Route path="/lessons" element={<ProtectedRoute><LessonsPage /></ProtectedRoute>} />
       </Routes>
     </div>
   );
