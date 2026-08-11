@@ -7,12 +7,13 @@ const cloudinary = require("../config/cloudinary");
 async function createLesson(req, res) {
 
     try {
-                 /// const course=req.params.couersid
-        req.body.creactedBy = req.user._id
-        const { title, content, creactedBy, course } = req.body
+        const course = req.params.couersid
+        const creactedBy = req.user._id
+        // console.log(creactedBy)
+        const { title, content } = req.body
 
         let videoUrl = null;
-        const video = req.files.videoUrl[0]
+        const video = req.files?.videoUrl?.[0]
         if (video) {
             const result = await uploadToCloudinary({
                 fileBuffer: req.files.videoUrl[0].buffer,
@@ -24,8 +25,8 @@ async function createLesson(req, res) {
             videoUrl = result.secure_url;
 
         }
-        let = null;
-        const pdf = req.files.pdfFile[0]
+        let pdfFile = null;
+        const pdf = req.files?.pdfFile?.[0]
         if (pdf) {
             const result = await uploadToCloudinary({
                 fileBuffer: req.files.pdfFile[0].buffer,
@@ -61,8 +62,9 @@ async function createLesson(req, res) {
 async function getAllLesson(req, res) {
 
     try {
-         /// const course=req.params.couersid
-        const AllLesson = await Lesson.find()
+        const course = req.params.couersid
+        //  console.log(course)
+        const AllLesson = await Lesson.find({ course })
         res.status(200).json(AllLesson);
     } catch (error) {
         console.log(error);
@@ -84,8 +86,8 @@ async function getLessonById(req, res) {
 
 async function deleteLessonById(req, res) {
     try {
-            
-         const id = req.params.id
+
+        const id = req.params.id
         const creactedBy = req.user._id
         const findLesson = await Lesson.findById(id)
         if (creactedBy != String(findLesson.creactedBy)) {
@@ -112,7 +114,7 @@ function getPathFromUrlvideo(Path) {
     // remove Extension 
     const fileNameWithoutExt = fileName.split(".")[0];
 
-    return `lms/lesson/video"${fileNameWithoutExt}`;
+    return `lms/lesson/video/"${fileNameWithoutExt}`;
 }
 function getPathFromUrlpdf(Path) {
     const parts = Path.split("/");
@@ -123,7 +125,7 @@ function getPathFromUrlpdf(Path) {
     // remove Extension 
     const fileNameWithoutExt = fileName.split(".")[0];
 
-    return `lms/lesson/file"${fileNameWithoutExt}`;
+    return `lms/lesson/file/"${fileNameWithoutExt}`;
 }
 
 
@@ -141,7 +143,7 @@ async function updateLessonById(req, res) {
         }
         //////  this for filepdf
         let pdfFile = findLesson.videoUrl;
-        const pdf = req.files.pdfFile[0]
+        const pdf = req.files?.pdfFile?.[0]
 
         if (pdf) {
             const result = await uploadToCloudinary({
@@ -159,9 +161,19 @@ async function updateLessonById(req, res) {
             pdfFile = result.secure_url;
 
         }
+
+        if (!req.body.pdfFile) {
+
+            const oldimagefilename = getPathFromUrlpdf(pdfFile)
+            await cloudinary.uploader.destroy(oldimagefilename)
+
+        }
+
+
+
         //////  this for videoURL
         let videoUrl = findLesson.videoUrl;
-        const video = req.files.videoUrl[0]
+        const video = req.files?.videoUrl?.[0]
 
         if (video) {
             const result = await uploadToCloudinary({
@@ -179,12 +191,22 @@ async function updateLessonById(req, res) {
             videoUrl = result.secure_url;
 
         }
-         const {title, content,} = req.body
-        const updatedLesson = await Lesson.findByIdAndUpdate(req.params.id, 
-            { title,
-              content,
+        if (!req.body.videoUrl) {
+
+            const oldimagefilename = getPathFromUrlvideo(videoUrl)
+            await cloudinary.uploader.destroy(oldimagefilename)
+
+        }
+
+
+        const { title, content, } = req.body
+        const updatedLesson = await Lesson.findByIdAndUpdate(req.params.id,
+            {
+                title,
+                content,
                 pdfFile,
-                 videoUrl, }, { new: true });
+                videoUrl,
+            }, { new: true });
         // console.log(updatedLesson)
         res.json(updatedLesson);
     } catch (error) {
@@ -198,5 +220,5 @@ async function updateLessonById(req, res) {
 
 
 module.exports = {
-    createLesson, getAllLesson, getLessonById, deleteLessonById ,updateLessonById
+    createLesson, getAllLesson, getLessonById, deleteLessonById, updateLessonById
 }

@@ -11,7 +11,7 @@ const upload=require("../middleware/upload")
 
 router.post("/assignments/:lessonid",upload.single("instructionsFile"), verifyToken,verifyRole.verifyInstructor,assignment.createAssignment )
 
-// router.put("/courses/:id",upload.single("image"),verifyToken,verifyRole.verifyInstructor,courses.updateCourseById)
+router.put("/courses/:id",upload.single("instructionsFile"),verifyToken,verifyRole.verifyInstructor,assignment.updateCourseById)
 
 // router.delete("/courses/:id", verifyToken,verifyRole.verifyInstructor,courses.deleteCourseById)
 

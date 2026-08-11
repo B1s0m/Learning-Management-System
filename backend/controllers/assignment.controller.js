@@ -26,7 +26,7 @@ async function createAssignment(req, res) {
 
         const lesson = req.params.lessonid
         const { title, instructions, dueDate } = req.body
-        const createdassignment = await Assignment.create({ title, instructions, dueDate, questions, lesson })
+        const createdassignment = await Assignment.create({ title, instructions, dueDate, questions, lesson ,instructionsFile })
         res.status(201).json(createdassignment);
     } catch (error) {
         console.log(error);

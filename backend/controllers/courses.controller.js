@@ -47,6 +47,21 @@ async function getAllCourse(req, res) {
 }
 
 
+async function getMyCourse(req, res) {
+
+    try {
+        // let {selections, ...filter} = req.query
+         const instructor=req.user._id
+        //  console.log(instructor)
+        const AllCourse = await Course.find({instructor})
+        res.status(200).json(AllCourse);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error })
+    }
+
+}
+
 
 async function getCourseById(req, res) {
     try {
@@ -146,6 +161,6 @@ async function deleteCourseById(req, res) {
 
 module.exports = {
 
-    createCourse, getAllCourse, getCourseById, deleteCourseById, updateCourseById
+    createCourse, getAllCourse, getCourseById, deleteCourseById, updateCourseById,getMyCourse
 
 }
