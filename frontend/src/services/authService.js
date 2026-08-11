@@ -1,4 +1,3 @@
-
 import api from './api'
 
 async function signUp(formData){
@@ -16,9 +15,7 @@ async function getCurrentUser(){
 
     const response = await api.get(
         "/auth/me"
-    );
-
-
+    )
     return response.data;
 
 }
@@ -37,4 +34,3 @@ export {
   getCurrentUser,
   logout
 };
-

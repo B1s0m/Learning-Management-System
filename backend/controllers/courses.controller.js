@@ -36,9 +36,12 @@ async function createCourse(req, res) {
 async function getAllCourse(req, res) {
 
     try {
-
-        const AllCourse = await Course.find()
-        res.status(200).json(AllCourse);
+        let {selections, ...filter} = req.query
+        let AllCourses = await Course.find(filter).select(selections).populate([
+            {path:'category', select:'name'},
+            {path:'instructor', select:"username"}
+        ])
+        res.status(200).json(AllCourses);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error })

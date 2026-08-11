@@ -9,19 +9,20 @@ function Signup() {
     username: "",
     password: "",
     passwordConf: "",
+    email: ""
   });
-  const [ submitting, setSubmitting ] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
-  const { username, password, passwordConf } = formData;
+  const { username, password, passwordConf, email } = formData;
 
-  function handleChange(event){
+  function handleChange(event) {
     setError("");
     setFormData({ ...formData, [event.target.name]: event.target.value });
 
   }
 
 
-  async function handleSubmit(event){
+  async function handleSubmit(event) {
     event.preventDefault();
     try {
       setSubmitting(true)
@@ -33,8 +34,8 @@ function Signup() {
     }
   }
 
-  function isFormInvalid(){
-    return !(username && password && password === passwordConf);
+  function isFormInvalid() {
+    return !(username && password && password === passwordConf && email);
   };
 
   return (
@@ -71,6 +72,17 @@ function Signup() {
             id="confirm"
             value={passwordConf}
             name="passwordConf"
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            name="email"
             onChange={handleChange}
             required
           />
