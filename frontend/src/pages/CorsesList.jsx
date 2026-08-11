@@ -24,21 +24,16 @@ function CorsesList() {
   return (
     <>
       <div>Corses List</div>
-      {
+      {allCorses.length !=0?
         allCorses.map((oneCorse) => {
           return <div key={oneCorse._id}>Title: {oneCorse.title} Category: {oneCorse.category.name} Instructor: {oneCorse.instructor.username} Price: {oneCorse.price}
             <button id={oneCorse._id} onClick={handleDetails}>More Details</button>
           </div>
         })
+        :<>Loading</>
       }
     </>
   )
 }
-/* 
-      allUsers.map((oneUser)=>{
-        return <div key={oneUser._id}>Name: {oneUser.username} Role: {oneUser.role}
-        <button id={oneUser._id} onClick={handleDetails}>More Details</button>
-        </div>
-        })
-*/
+
 export default CorsesList

@@ -53,7 +53,10 @@ async function getAllCourse(req, res) {
 
 async function getCourseById(req, res) {
     try {
-        const foundCourse = await Course.findById(req.params.id)
+        const foundCourse = await Course.findById(req.params.id).populate([
+            {path:"instructor"},
+            {path:"category"}
+        ])
         res.status(200).json(foundCourse);
     } catch (error) {
         console.log(error);

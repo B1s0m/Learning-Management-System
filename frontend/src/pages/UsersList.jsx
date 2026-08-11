@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router"
-import { getAllCorses, deleteCorseById } from "../services/functions/corses"
+import { getAllUsers, deleteUserById } from "../services/functions/user"
 import { useEffect, useState } from "react"
 
 function UsersList() {
@@ -8,7 +8,7 @@ function UsersList() {
 
   async function loadAllUsers(){
     try{
-        const users = await getAllCorses("","username role")
+        const users = await getAllUsers("","username role")
         setAllUsers(users.data)
     }catch(err){
       console.log(err)
@@ -19,7 +19,7 @@ function UsersList() {
   }, [])
 
   async function handleDetails(event) {
-    navigate("/CorseDetails/"+event.target.id)
+    navigate("/UserDetails/"+event.target.id)
   }
   return (
     <>
