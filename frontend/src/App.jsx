@@ -12,6 +12,7 @@ import CorsesList from "./pages/CorsesList";
 import CorseDetails from "./pages/CorseDetails";
 import CartPage from "./pages/CartPage";
 import LessonsPage from "./pages/LessonsPage";
+import CreateCourse from "./pages/Course";
 
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
@@ -32,6 +33,8 @@ function App() {
         <Route path="/corseDetails/:id" element={<ProtectedRoute><CorseDetails /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
         <Route path="/lessons" element={<ProtectedRoute><LessonsPage /></ProtectedRoute>} />
+        <Route path="/createcourses" element={<CreateCourse />} />
+
       </Routes>
     </div>
   );
