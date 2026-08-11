@@ -112,7 +112,7 @@ function getPathFromUrlvideo(Path) {
     // remove Extension 
     const fileNameWithoutExt = fileName.split(".")[0];
 
-    return `lms/lesson/video"${fileNameWithoutExt}`;
+    return `lms/lesson/video/"${fileNameWithoutExt}`;
 }
 function getPathFromUrlpdf(Path) {
     const parts = Path.split("/");
@@ -123,7 +123,7 @@ function getPathFromUrlpdf(Path) {
     // remove Extension 
     const fileNameWithoutExt = fileName.split(".")[0];
 
-    return `lms/lesson/file"${fileNameWithoutExt}`;
+    return `lms/lesson/file/"${fileNameWithoutExt}`;
 }
 
 

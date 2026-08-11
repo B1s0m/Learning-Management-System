@@ -1,17 +1,17 @@
 const router = require("express").Router();
 const verifyToken = require("../middleware/verifyToken");
 const {getCartsByConditionsWithSelection, creatCart, deleteCartById, deleteAllCart, checkoutCart} = require("../controllers/cart.controller")
-const {verifyAdmin, verifyInstructor} = require("../middleware/verifyRole")
+const {verifyAdmin, verifyInstructor,verifyStudent} = require("../middleware/verifyRole")
 
 router.get("/", verifyToken, getCartsByConditionsWithSelection)
 
-router.post("/:Id", verifyToken, verifyAdmin, creatCart)
+router.post("/:Id", verifyToken, verifyStudent, creatCart)
 
-router.post("/", verifyToken, verifyAdmin, checkoutCart)
+router.post("/", verifyToken, verifyStudent, checkoutCart)
 
-router.delete("/:Id", verifyToken, verifyAdmin, deleteCartById)
+router.delete("/:courseId", verifyToken, verifyStudent, deleteCartById)
 
-router.delete("/allCart/:id", verifyToken, verifyAdmin, deleteAllCart)
+router.delete("/allCart/:id", verifyToken, verifyStudent, deleteAllCart)
 
 
 

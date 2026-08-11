@@ -1,4 +1,6 @@
 const Cart = require("../models/Cart")
+const Course = require("../models/Course")
+const Enrollment = require("../models/Enrollment");
 
 // مثال للاستدعاء
 // http://localhost:3000/carts/list?isActive=Online&role=student&selections=email
@@ -17,15 +19,38 @@ async function getCartsByConditionsWithSelection(req, res) {
 
 async function creatCart(req, res) {
     try {
-        let hasCart = await Cart.findOne({ student: req.user_id })
-        if (req.user.role == "student" && !hasCart) {
-            let createdCart = await Cart.create({
-                student: req.user_id,
+
+
+        const id = req.params.id
+        const findCourse = await Course.findById(id)
+
+        if (!findCourse) {
+            return res.status(404).json({
+                message: "Course not found",
+            });
+        }
+
+        let hasCart = await Cart.findOne({ student: req.user._id })
+
+        if (!hasCart) {
+            let hasCart = await Cart.create({
+                student: req.user._id,
                 items: []
             })
-            return res.status(201).json(createdCart)
-        }else{
-            return res.status(403).json({message: "You Are Not A Student Or You Have Alredy A Cart"})
+
+
+
+            hasCart.items.push({ course: id, price: findCourse.price })
+
+
+
+
+            await hasCart.save();
+
+
+
+            return res.status(201).json(hasCart)
+
         }
     } catch (error) {
         console.log(error);
@@ -35,8 +60,39 @@ async function creatCart(req, res) {
 
 async function checkoutCart(req, res) {
     try {
-        // const updatedCart = await Cart.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        // res.json(updatedCart);
+
+        const student = req.user._id
+
+        const myCart = await Cart.findOne({ student })
+
+        if (!myCart) {
+            return res.status(404).json({
+                message: "Course not found",
+            });
+        }
+        if (myCart.items.length === 0) {
+            return res.status(400).json({
+                message: "Cart is empty",
+            });
+        }
+
+
+        for (const item of myCart.items) {
+            await Enrollment.create({
+                student,
+                course: item.course,
+                accessType: "purchase",
+                amount: item.price,
+            });
+        }
+        const deleteallCart = await Cart.deleteOne({ student });
+
+        return res.status(200).json({
+            message: "Checkout successful",
+        });
+
+
+
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error })
@@ -46,9 +102,24 @@ async function checkoutCart(req, res) {
 
 async function deleteCartById(req, res) {
     try {
+        const student = req.user._id
 
-        const deleteCart = await Cart.findByIdAndDelete(req.params.id);
-        res.json(deleteCart);
+        const courseId = req.params.courseId
+
+        const myCart = await Cart.findOne({ student })
+
+        if (!myCart) {
+            return res.status(404).json({
+                message: "Course not found",
+            });
+        }
+
+        myCart.items = myCart.items.filter((item) => String(item.course) != courseId)
+
+        await myCart.save();
+
+        return res.status(200).json(myCart);
+
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error })
@@ -58,7 +129,7 @@ async function deleteCartById(req, res) {
 async function deleteAllCart(req, res) {
     try {
         const student = req.user._id
-        const deleteallCart = await Cart.deleteMany({ student });
+        const deleteallCart = await Cart.findByIdAndDelete(student );
         res.json(deleteallCart);
     } catch (error) {
         console.log(error);

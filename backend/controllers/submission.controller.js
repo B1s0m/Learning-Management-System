@@ -24,6 +24,9 @@ async function getSubmissionsByConditionsWithSelection(req, res) {
         res.status(500).json({ message: error })
     }
 }
+
+
+
 async function creatSubmission(req, res) {
     try {
         if (req.user?.role == "student") {
@@ -51,6 +54,7 @@ async function creatSubmission(req, res) {
         res.status(500).json({ message: error })
     }
 }
+
 async function updateSubmissionById(req, res) {
     try {
         let thisSubmission = await Submission.findById(req.params.id).populate({

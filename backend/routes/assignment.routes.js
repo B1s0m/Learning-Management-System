@@ -5,15 +5,15 @@ const verifyRole=require("../middleware/verifyRole")
 const upload=require("../middleware/upload")
 
 
-// router.get("/assignments/:lessonid",verifyToken,courses.getAllCourse)
+router.get("/assignments/all/:courseid",verifyToken, assignment.getAllAssignment )
 
-// router.get("/courses/:id",verifyToken,courses.getCourseById)
+router.get("/assignments/:id",verifyToken, assignment.getAssignmentById )
 
-router.post("/assignments/:lessonid",upload.single("instructionsFile"), verifyToken,verifyRole.verifyInstructor,assignment.createAssignment )
+router.post("/assignments/lesson/:lessonid", upload.single("instructionsFile") , verifyToken ,verifyRole.verifyInstructor ,assignment.createAssignment )
 
-// router.put("/courses/:id",upload.single("image"),verifyToken,verifyRole.verifyInstructor,courses.updateCourseById)
+router.put("/assignments/:id",upload.single("instructionsFile"),verifyToken, verifyRole.verifyInstructor ,assignment.updateAssignmentById)
 
-// router.delete("/courses/:id", verifyToken,verifyRole.verifyInstructor,courses.deleteCourseById)
+router.delete("/assignments/:id", verifyToken, verifyRole.verifyInstructor, assignment.deleteAssignmentById)
 
 
 
