@@ -127,13 +127,15 @@ async function updateAssignmentById(req, res) {
 
 
         /// add questions
-        const { title, instructions, dueDate, questions } = req.body
+        const questions = JSON.parse(req.body.questions);
+        const { title, instructions, dueDate } = req.body
+          
 
-        const updatedAssignment = await Assignment.findByIdAndUpdate(id,
+        const updatedAssignment = await Assignment.findByIdAndUpdate(id,{
             title,
             instructions,
             dueDate,
-            instructionsFile, questions
+            instructionsFile, questions }
             , { new: true });
         res.json(updatedAssignment);
     } catch (error) {
