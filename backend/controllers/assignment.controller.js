@@ -73,7 +73,7 @@ async function getLessonAssignments(req, res){
 async function getAssignmentById(req, res) {
     try {
         const assignmentid = req.params.id
-        const foundassignment = await Assignment.findById(assignmentid)
+        const foundassignment = await Assignment.findById(assignmentid).populate("lesson", "title creactedBy")
         res.status(200).json(foundassignment);
     } catch (error) {
         console.log(error);
