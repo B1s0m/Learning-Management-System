@@ -35,7 +35,7 @@ app.use("/enrollment", enrollmentRoutes)
 app.use('/',categoriesRoutes)
 app.use('/',coursesRoutes)
 app.use('/lesson',lessonRoutes)
-app.use('/',assignmentsRoutes)
+app.use('/assignments', assignmentsRoutes)
 
 
 

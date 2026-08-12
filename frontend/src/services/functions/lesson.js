@@ -24,9 +24,36 @@ async function deleteLessonById(id) {
         console.log(error)
     }
 }
+async function getAllAssignmentByLessonID(id) {
+    try{
+        let allAssignments = await api.get("/assignments/lesson/"+id)
+        return allAssignments
+    }catch(error){
+        console.log(error)
+    }
+}
+async function getAssignmentByID(id) {
+    try{
+        let thisAssignment = await api.get("/assignments/"+id)
+        return thisAssignment
+    }catch(error){
+        console.log(error)
+    }
+}
+async function deleteAssignmentByID(id) {
+    try{
+        let toDeleteAssignment = await api.delete("/assignments/"+id)
+        return toDeleteAssignment
+    }catch(error){
+        console.log(error)
+    }
+}
 
 export {
     getAllLessons,
     getLessonById,
-    deleteLessonById
+    deleteLessonById,
+    getAllAssignmentByLessonID,
+    getAssignmentByID,
+    deleteAssignmentByID
 }

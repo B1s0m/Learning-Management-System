@@ -18,6 +18,13 @@ import CategoryList from "./pages/CategoryList";
 import MyCourses from "./pages/MyCourses"
 import Lessons from "./pages/Lessons";
 import EditCourse from "./pages/EditCourse";
+import LessonDetails from "./pages/LessonDetails";
+import CategoryList from "./pages/CategoryList";
+import MyCourses from "./pages/MyCourses"
+import Lessons from "./pages/Lessons";
+import Assignments from "./pages/Assignments";
+import AssignmentDetails from "./pages/AssignmentDetails";
+
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -43,6 +50,9 @@ function App() {
         <Route path="/ctegoriesList" element={<ProtectedRoute><CategoryList /></ProtectedRoute>} />
         <Route path="/myCourses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
         <Route path="/all/lessons/:courseId" element={<ProtectedRoute><Lessons /></ProtectedRoute>} />
+        <Route path="/lessons/:lessonId" element={<ProtectedRoute><LessonDetails /></ProtectedRoute>} />
+        <Route path="/assignments/:lessonId" element={<ProtectedRoute><Assignments /></ProtectedRoute>} />
+        <Route path="/assignments/details/:assignmentId" element={<ProtectedRoute><Assignments /></ProtectedRoute>} />
       </Routes>
     </div>
   );

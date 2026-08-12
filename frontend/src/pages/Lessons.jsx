@@ -21,7 +21,7 @@ function Lessons() {
   }, [])
 
   function handleDetails(event) {
-    navigate("/lesson/" + event.target.id)
+    navigate("/lessons/" + event.target.id)
   }
 
   return (

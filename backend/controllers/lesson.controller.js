@@ -82,7 +82,10 @@ async function getAllLesson(req, res) {
 
 async function getLessonById(req, res) {
     try {
-        const foundLesson = await Lesson.findById(req.params.id)
+        const foundLesson = await Lesson.findById(req.params.id).populate([
+            {path: "course", select:"title"},
+            {path: "creactedBy", select: "username"}
+        ])
         res.status(200).json(foundLesson);
     } catch (error) {
         console.log(error);

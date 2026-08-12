@@ -11,7 +11,7 @@ function UserDetails() {
     bio: "",
     expertise: ""
   })
-  const { user } = useAuth
+  const { user } = useAuth()
   const navigate = useNavigate()
   const {id} = useParams()
 
@@ -59,14 +59,5 @@ function UserDetails() {
     </>
   )
 }
-/* 
-  async function handleDelete (event){
-    await deleteEntry(event.target.id)
-    navigate("/entries")
-  }
-  async function handleEdit (event){
-    navigate("/edit/"+event.target.id)
-  }
 
-*/
 export default UserDetails
