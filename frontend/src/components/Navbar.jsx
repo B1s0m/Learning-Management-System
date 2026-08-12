@@ -22,9 +22,8 @@ function Navbar() {
       :user && user.role == "instructor"?
       (<>
         <button onClick={logout}>Sign Out</button>
+        <Link to="/myCourses">My Corses</Link>
         <Link to="">create Corse</Link>
-        <Link to="">My Corses</Link>
-        
       </>)
       :<>
         <Link to='/sign-up'>Sign Up</Link>

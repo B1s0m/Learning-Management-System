@@ -14,6 +14,7 @@ import CartPage from "./pages/CartPage";
 import LessonsPage from "./pages/LessonsPage";
 import CategoryList from "./pages/CategoryList";
 import MyCourses from "./pages/MyCourses"
+import Lessons from "./pages/Lessons";
 
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
@@ -33,9 +34,9 @@ function App() {
         <Route path="/coursesList" element={<CorsesList />} />
         <Route path="/corseDetails/:id" element={<ProtectedRoute><CorseDetails /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
-        <Route path="/lessons" element={<ProtectedRoute><LessonsPage /></ProtectedRoute>} />
         <Route path="/ctegoriesList" element={<ProtectedRoute><CategoryList /></ProtectedRoute>} />
         <Route path="/myCourses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
+        <Route path="/all/lessons/:courseId" element={<ProtectedRoute><Lessons /></ProtectedRoute>} />
       </Routes>
     </div>
   );

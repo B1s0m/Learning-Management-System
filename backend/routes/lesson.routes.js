@@ -5,22 +5,22 @@ const verifyRole=require("../middleware/verifyRole")
 const upload=require("../middleware/upload")
 
 // //// all user cae see
-router.get("/lesson",verifyToken,lesson.getAllLesson)
+router.get("/all/:courseId",verifyToken,lesson.getAllLesson)
 
-router.get("/lesson/:id",verifyToken,lesson.getLessonById)
+router.get("/:id",verifyToken,lesson.getLessonById)
 
 /// only instructor
-router.post("/lesson",   upload.fields([
+router.post("/",   upload.fields([
     { name: "videoUrl", maxCount: 1 },
     { name: "pdfFile", maxCount: 1 },
   ]),verifyToken,verifyRole.verifyInstructor,lesson.createLesson)
 
-router.put("/lesson/:id",upload.fields([
+router.put("/:id",upload.fields([
     { name: "videoUrl", maxCount: 1 },
     { name: "pdfFile", maxCount: 1 },
   ]),verifyToken,verifyRole.verifyInstructor,lesson.updateLessonById)
 
-router.delete("/lesson/:id", verifyToken,verifyRole.verifyInstructor,lesson.deleteLessonById)
+router.delete("/:id", verifyToken,verifyRole.verifyInstructor,lesson.deleteLessonById)
 
 
 
