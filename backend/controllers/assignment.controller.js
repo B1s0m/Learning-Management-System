@@ -57,10 +57,18 @@ async function getAllAssignment(req, res) {
         console.log(error);
         res.status(500).json({ message: error })
     }
+}
+async function getLessonAssignments(req, res){
+        try {
+            const lessonId = req.params.lessonId
+            const allAssignments = await Assignment.find({lesson: lessonId}).select("title questions dueDate")
+            res.status(200).json(allAssignments)
+        } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error })
+    }
 
 }
-
-
 
 async function getAssignmentById(req, res) {
     try {
@@ -179,7 +187,7 @@ async function deleteAssignmentById(req, res) {
 
 
 module.exports = {
-    createAssignment, getAllAssignment, getAssignmentById, deleteAssignmentById, updateAssignmentById
+    createAssignment, getAllAssignment, getAssignmentById, deleteAssignmentById, updateAssignmentById, getLessonAssignments
 
 
 }

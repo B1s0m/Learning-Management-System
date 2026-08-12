@@ -11,10 +11,11 @@ import EditUser from "./pages/EditUser";
 import CorsesList from "./pages/CorsesList";
 import CorseDetails from "./pages/CorseDetails";
 import CartPage from "./pages/CartPage";
-import LessonsPage from "./pages/LessonsPage";
+import LessonDetails from "./pages/LessonDetails";
 import CategoryList from "./pages/CategoryList";
 import MyCourses from "./pages/MyCourses"
 import Lessons from "./pages/Lessons";
+import Assignments from "./pages/Assignments";
 
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
@@ -37,6 +38,8 @@ function App() {
         <Route path="/ctegoriesList" element={<ProtectedRoute><CategoryList /></ProtectedRoute>} />
         <Route path="/myCourses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
         <Route path="/all/lessons/:courseId" element={<ProtectedRoute><Lessons /></ProtectedRoute>} />
+        <Route path="/lessons/:lessonId" element={<ProtectedRoute><LessonDetails /></ProtectedRoute>} />
+        <Route path="/assignments/:lessonId" element={<ProtectedRoute><Assignments /></ProtectedRoute>} />
       </Routes>
     </div>
   );

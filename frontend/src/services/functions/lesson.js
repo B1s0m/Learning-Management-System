@@ -24,9 +24,18 @@ async function deleteLessonById(id) {
         console.log(error)
     }
 }
+async function getAllAssignmentByLessonID(id) {
+    try{
+        let allAssignments = await api.get("/assignments/lesson/"+id)
+        return allAssignments
+    }catch(error){
+        console.log(error)
+    }
+}
 
 export {
     getAllLessons,
     getLessonById,
-    deleteLessonById
+    deleteLessonById,
+    getAllAssignmentByLessonID
 }
