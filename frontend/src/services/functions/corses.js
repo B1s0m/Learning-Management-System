@@ -40,6 +40,14 @@ async function deleteCorseById(id) {
         console.log(error)
     }
 }
+async function getMyCorses() {
+    try {
+        let myEnrollment = await api.get("/enrollment")
+        return myEnrollment
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
 export {
@@ -48,4 +56,5 @@ export {
     creatCorse,
     updateCorseById,
     deleteCorseById,
+    getMyCorses
 }

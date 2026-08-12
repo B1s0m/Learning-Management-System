@@ -13,6 +13,7 @@ import CorseDetails from "./pages/CorseDetails";
 import CartPage from "./pages/CartPage";
 import LessonsPage from "./pages/LessonsPage";
 import CategoryList from "./pages/CategoryList";
+import MyCourses from "./pages/MyCourses"
 
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
@@ -34,6 +35,7 @@ function App() {
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
         <Route path="/lessons" element={<ProtectedRoute><LessonsPage /></ProtectedRoute>} />
         <Route path="/ctegoriesList" element={<ProtectedRoute><CategoryList /></ProtectedRoute>} />
+        <Route path="/myCourses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
       </Routes>
     </div>
   );

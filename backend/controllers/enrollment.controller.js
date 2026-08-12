@@ -7,7 +7,15 @@ async function getMyEnrollment(req, res) {
 
     try {
           const student = req.user._id
-        const AllEnrollment = await Enrollment.find({student})
+        const AllEnrollment = await Enrollment.find({student}).populate([
+           {path:"course", 
+            select:"title category instructor price", 
+            populate:[
+                {path: "category", select:"name"},
+                {path:"instructor", select:"username"}
+            ]
+        }
+        ])
         res.status(200).json(AllEnrollment);
     } catch (error) {
         console.log(error);

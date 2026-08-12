@@ -1,15 +1,16 @@
 import { useNavigate } from "react-router"
-import { getAllCorses, deleteCorseById } from "../services/functions/corses"
+import { getMyCorses } from "../services/functions/corses"
 import { useEffect, useState } from "react"
 
-function CorsesList() {
-  const [allCorses, setAllCorses] = useState([])
-  const navigate = useNavigate()
+function MyCourses() {
+    const [allCorses, setAllCorses] = useState([])
+    const navigate = useNavigate()
 
-  async function loadAllCorses() {
+      async function loadAllCorses() {
     try {
-      const Corses = await getAllCorses("", "title category instructor price")
+      const Corses = await getMyCorses()
       setAllCorses(Corses.data)
+      console.log(Corses.data)
     } catch (err) {
       console.log(err)
     }
@@ -17,13 +18,13 @@ function CorsesList() {
   useEffect(() => {
     loadAllCorses()
   }, [])
-  async function handleDetails(event) {
+    async function handleDetails(event) {
     navigate("/corseDetails/" + event.target.id)
   }
 
   return (
     <>
-      <div>Corses List</div>
+      <div>My Courses</div>
       <table>
         <thead>
           <tr><th>Title</th> <th>Category</th> <th>Instructor</th> <th>Price</th> <th></th></tr>
@@ -48,5 +49,15 @@ function CorsesList() {
     </>
   )
 }
+/* 
+
+  return (
+    <>
+      
+    </>
+  )
+}
 
 export default CorsesList
+*/
+export default MyCourses

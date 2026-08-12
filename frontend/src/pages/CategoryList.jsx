@@ -6,15 +6,15 @@ function CategoriesList() {
   const [allCategories, setAllCategories] = useState([])
   const navigate = useNavigate()
 
-  async function loadAllCategories(){
-    try{
-        const categories = await getAllCategories()
-        setAllCategories(categories.data)
-    }catch(err){
+  async function loadAllCategories() {
+    try {
+      const categories = await getAllCategories()
+      setAllCategories(categories.data)
+    } catch (err) {
       console.log(err)
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     loadAllCategories()
   }, [])
 
@@ -24,15 +24,23 @@ function CategoriesList() {
   }
   return (
     <>
-    <div>Categories List</div>
-    {
-      allCategories.map((oneCategory)=>{
-        return <div key={oneCategory._id}>Name: {oneCategory.name} 
-        <div>Description: {oneCategory.description}</div>
-        <button id={oneCategory._id} onClick={handleDelete}>Delete</button>
-        </div>
-        })
-    }
+      <div>Categories List</div>
+      <table>
+        <thead>
+          <tr><th>Name</th> <th>Description</th> <th></th></tr>
+        </thead>
+        <tbody>
+          {
+            allCategories.map((oneCategory) => {
+              return <tr key={oneCategory._id}>
+                <td>{oneCategory.name}</td>
+                <td>{oneCategory.description}</td>
+                <td><button id={oneCategory._id} onClick={handleDelete}>Delete</button></td>
+              </tr>
+            })
+          }
+        </tbody>
+      </table>
     </>
   )
 }

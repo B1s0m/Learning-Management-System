@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import { useAuth } from '../context/AuthContext'
+import { getMyCorses } from '../services/functions/corses'
 
 function Navbar() {
   const { logout, user} = useAuth()
@@ -15,7 +16,7 @@ function Navbar() {
       user && user.role == "student" ? 
       (<>
         <button onClick={logout}>Sign Out</button>
-        <Link to=''>Corses</Link>
+        <Link to="/myCourses">My Corses</Link>
         <Link to=''>Cart</Link>
       </>)
       :user && user.role == "instructor"?
