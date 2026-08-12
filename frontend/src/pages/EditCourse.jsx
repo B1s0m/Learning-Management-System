@@ -1,9 +1,10 @@
 import "../components/css/CreateCourses.css";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import { CreataeCourse, getAllCategory } from "../services/instructorService";
-import { useNavigate } from "react-router";
-const CreateCourse = () => {
+import { getAllCategory } from "../services/instructorService";
+import { getCorseById, updateCorseById } from "../services/functions/corses";
+import { useNavigate, useParams } from "react-router";
+const editCourse = () => {
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState(null);
@@ -19,6 +20,7 @@ const CreateCourse = () => {
     accessCode: "",
     accessCodeActive: false,
   });
+  const { id } = useParams();
 
   const navigate = useNavigate();
   function handleChange(event) {
@@ -33,11 +35,12 @@ const CreateCourse = () => {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
     try {
       const data = new FormData();
 
       data.append("title", formData.title);
-      data.append("category", formData.category);
+      data.append("category", formData.category?._id || formData.category);
       data.append("description", formData.description);
       data.append("level", formData.level);
       data.append("price", formData.price);
@@ -46,13 +49,13 @@ const CreateCourse = () => {
       data.append("accessCode", formData.accessCode);
       data.append("accessCodeActive", formData.accessCodeActive);
 
-      if (formData.image) {
+      if (formData.image instanceof File) {
         data.append("image", formData.image);
       }
 
-      await CreataeCourse(data);
+      await updateCorseById(id, data);
 
-      navigate(`/myCourses`);
+      navigate("/myCourses");
     } catch (error) {
       console.log(error);
     }
@@ -60,8 +63,12 @@ const CreateCourse = () => {
 
   async function loadData() {
     try {
-      const res = await getAllCategory();
-      setCategory(res);
+      const resC = await getAllCategory();
+      setCategory(resC);
+
+      const resc = await getCorseById(id);
+      setFormData(resc.data);
+      console.log(resc.data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -72,16 +79,17 @@ const CreateCourse = () => {
   useEffect(() => {
     loadData();
   }, []);
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
   return (
     <div>
-      <h1></h1>
+      <h1>Edit Course</h1>
 
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>
-          <label for="title">Course Title: </label>
+          <label htmlFor="title">Course Title: </label>
           <input
             type="text"
             id="title"
@@ -93,15 +101,17 @@ const CreateCourse = () => {
         </div>
 
         <div>
-          <label for="category">Category:</label>
+          <label htmlFor="category">Category:</label>
 
           <select
             id="category"
             name="category"
             onChange={handleChange}
+            value={formData.category._id}
             required
           >
             <option value="">Select Category</option>
+
             {category.map((one) => (
               <option key={one._id} value={one._id}>
                 {one.name}
@@ -111,18 +121,23 @@ const CreateCourse = () => {
         </div>
 
         <div>
-          <label for="description">Description:</label>
+          <label htmlFor="description">Description:</label>
           <textarea
             id="description"
             name="description"
             rows="5"
             required
+            value={formData.description}
             onChange={handleChange}
           ></textarea>
         </div>
 
         <div>
-          <label for="image">Course Image:</label>
+          <label htmlFor="image">Course Image:</label>
+          {formData.image && (
+            <img src={formData.image} alt="Course" width="200" />
+          )}
+
           <input
             type="file"
             id="image"
@@ -133,7 +148,7 @@ const CreateCourse = () => {
         </div>
 
         <div>
-          <label for="level">Level:</label>
+          <label htmlFor="level">Level:</label>
           <select id="level" name="level" onChange={handleChange}>
             <option value="beginner">Beginner</option>
             <option value="intermediate">Intermediate</option>
@@ -142,7 +157,7 @@ const CreateCourse = () => {
         </div>
 
         <div>
-          <label for="price">Price:</label>
+          <label htmlFor="price">Price:</label>
           <input
             onChange={handleChange}
             type="number"
@@ -156,7 +171,7 @@ const CreateCourse = () => {
         </div>
 
         <div>
-          <label for="discount">Discount:</label>
+          <label htmlFor="discount">Discount:</label>
           <input
             onChange={handleChange}
             type="number"
@@ -181,7 +196,7 @@ const CreateCourse = () => {
         </div>
 
         <div>
-          <label for="accessCode">Access Code:</label>
+          <label htmlFor="accessCode">Access Code:</label>
           <input
             type="text"
             id="accessCode"
@@ -203,10 +218,10 @@ const CreateCourse = () => {
           </label>
         </div>
 
-        <button type="submit">Create Course</button>
+        <button type="submit">Update Course</button>
       </form>
     </div>
   );
 };
 
-export default CreateCourse;
+export default editCourse;

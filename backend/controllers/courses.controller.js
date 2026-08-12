@@ -69,7 +69,10 @@ async function getMyCourse(req, res) {
 
 async function getCourseById(req, res) {
     try {
-        const foundCourse = await Course.findById(req.params.id)
+        const foundCourse = await Course.findById(req.params.id).populate([
+            {path:"instructor"},
+            {path:"category"}
+        ])
         res.status(200).json(foundCourse);
     } catch (error) {
         console.log(error);
@@ -123,8 +126,11 @@ async function updateCourseById(req, res) {
         }
         // console.log(req.file);
 
-const {title, description, price, discount, level, category} = req.body
+const {title, description, price, discount, level, category, accessCode, accessCodeActive,isPublished} = req.body
         const updatedCourse = await Course.findByIdAndUpdate(req.params.id, {
+            accessCode,
+            accessCodeActive,
+            isPublished,
             title,
             description,
             price: Number(price),

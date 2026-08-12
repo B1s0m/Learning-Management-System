@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router"
-import { getUserById } from "../services/functions/user"
+import { getUserById, deleteUserById } from "../services/functions/user"
 import { useEffect, useState } from "react"
 import { useAuth } from "../context/AuthContext"
 
@@ -27,7 +27,8 @@ function UserDetails() {
     loadThisUser()
   }, [])
   async function handleDelete(event) {
-    navigate("/userDetails/"+event.target.id)
+    deleteUserById(event.target.id)
+    navigate("/users/List")
   }
   async function handleEdit(event) {
     

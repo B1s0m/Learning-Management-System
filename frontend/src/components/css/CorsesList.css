@@ -1,0 +1,115 @@
+/* Main page */
+.courses-page {
+  margin-left: 240px;
+  padding: 40px;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+/* Header */
+.courses-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.courses-header h1 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 30px;
+}
+
+.courses-header p {
+  margin-top: 7px;
+  color: #64748b;
+}
+
+/* Table container */
+.table-container {
+  background-color: white;
+
+  border-radius: 10px;
+  overflow: hidden;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Table */
+.courses-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Table header */
+.courses-table thead {
+  background-color: #1e293b;
+}
+
+.courses-table th {
+  padding: 16px 20px;
+  text-align: left;
+
+  color: white;
+  font-size: 14px;
+}
+
+/* Table data */
+.courses-table td {
+  padding: 17px 20px;
+
+  border-bottom: 1px solid #e2e8f0;
+
+  color: #334155;
+}
+
+/* Row hover */
+.courses-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* Category */
+.category {
+  background-color: #e0f2fe;
+  color: #0369a1;
+
+  padding: 5px 10px;
+  border-radius: 20px;
+
+  font-size: 13px;
+}
+
+/* Price */
+.price {
+  font-weight: bold;
+  color: #16a34a !important;
+}
+
+/* Details button */
+.details-btn {
+  border: none;
+
+  background-color: #0ea5e9;
+  color: white;
+
+  padding: 9px 15px;
+
+  border-radius: 6px;
+
+  cursor: pointer;
+  font-size: 14px;
+
+  transition: 0.2s;
+}
+
+.details-btn:hover {
+  background-color: #0284c7;
+}
+
+/* Loading */
+.loading {
+  text-align: center !important;
+  padding: 40px !important;
+  color: #64748b !important;
+}

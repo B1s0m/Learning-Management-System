@@ -10,7 +10,7 @@ async function getAllCorses(filter="", selections) {
 }
 async function getCorseById(id) {
     try {
-        let thisCorse = await api.get("/corses/" + id)
+        let thisCorse = await api.get("/courses/" + id)
         return thisCorse
     } catch (error) {
         console.log(error)
@@ -18,7 +18,7 @@ async function getCorseById(id) {
 }
 async function creatCorse(body) {
     try{
-        let createdCourse = await api.post("/corses", body)
+        let createdCourse = await api.post("/courses", body)
         return createdCourse.data
     }catch(error){
         console.log(error)
@@ -26,7 +26,7 @@ async function creatCorse(body) {
 }
 async function updateCorseById(id, body) {
     try {
-        let updatedCorse = await api.put("/corses/" + id, body)
+        let updatedCorse = await api.put("/courses/" + id, body)
         return updatedCorse
     } catch (error) {
         console.log(error)
@@ -34,8 +34,16 @@ async function updateCorseById(id, body) {
 }
 async function deleteCorseById(id) {
     try {
-        let deletedCorse = await api.delete("/corses/" + id)
+        let deletedCorse = await api.delete("/courses/" + id)
         return deletedcorse
+    } catch (error) {
+        console.log(error)
+    }
+}
+async function getMyCorses() {
+    try {
+        let myEnrollment = await api.get("/enrollment")
+        return myEnrollment
     } catch (error) {
         console.log(error)
     }
@@ -45,6 +53,8 @@ async function deleteCorseById(id) {
 export {
     getAllCorses,
     getCorseById,
+    creatCorse,
     updateCorseById,
     deleteCorseById,
+    getMyCorses
 }

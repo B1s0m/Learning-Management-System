@@ -1,8 +1,8 @@
 const Lesson = require("../models/Lesson");
 const uploadToCloudinary = require("./uploadToCloudinary");
 const cloudinary = require("../config/cloudinary");
-
-
+const Enrollment = require("../models/Enrollment");
+const Course = require("../models/Course")
 
 async function createLesson(req, res) {
 
@@ -60,17 +60,24 @@ async function createLesson(req, res) {
 
 
 async function getAllLesson(req, res) {
-
     try {
-        const course = req.params.couersid
-         console.log(course)
-        const AllLesson = await Lesson.find({ course })
-        res.status(200).json(AllLesson);
+        const { courseId } = req.params
+        const enrollment = await Enrollment.findOne({ student: req.user._id, course: courseId })
+        const isInstructor = await Course.findOne({ _id: courseId, instructor: req.user._id })
+        if (enrollment || isInstructor) {
+            const allLessons = await Lesson.find({ course: courseId }).populate([
+                { path: "course", select: "title" },
+                { path: "creactedBy", select: "username" }
+            ])
+            return res.status(200).json(allLessons)
+
+        } else {
+            return res.status(403).json({ message: "You Are Not In The Course And You Are Not the Creator Of This Course" })
+        }
     } catch (error) {
-        console.log(error);
+        console.log(error)
         res.status(500).json({ message: error })
     }
-
 }
 
 async function getLessonById(req, res) {

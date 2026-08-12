@@ -14,7 +14,10 @@ import CorseDetails from "./pages/CorseDetails";
 import CartPage from "./pages/CartPage";
 import LessonsPage from "./pages/LessonsPage";
 import CreateCourse from "./pages/CreateCourse";
-
+import CategoryList from "./pages/CategoryList";
+import MyCourses from "./pages/MyCourses"
+import Lessons from "./pages/Lessons";
+import EditCourse from "./pages/EditCourse";
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -34,8 +37,12 @@ function App() {
         <Route path="/corseDetails/:id" element={<ProtectedRoute><CorseDetails /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
         <Route path="/lessons" element={<ProtectedRoute><LessonsPage /></ProtectedRoute>} />
-        <Route path="/createcourses" element={<CreateCourse />} />
+        <Route path="/createcourses" element={    <ProtectedRoute><CreateCourse /> </ProtectedRoute> } />
+        <Route path="/editCourse/:id" element={<ProtectedRoute><EditCourse /></ProtectedRoute>} />
 
+        <Route path="/ctegoriesList" element={<ProtectedRoute><CategoryList /></ProtectedRoute>} />
+        <Route path="/myCourses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
+        <Route path="/all/lessons/:courseId" element={<ProtectedRoute><Lessons /></ProtectedRoute>} />
       </Routes>
     </div>
   );
