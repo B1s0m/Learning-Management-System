@@ -7,9 +7,10 @@ const cloudinary = require("../config/cloudinary");
 async function createCourse(req, res) {
 
     try {
-        req.body.instructor = req.user._id
-        const { title, category, description, level, isPublished, price, discount, accessCode, accessCodeActive, instructor } = req.body
-
+        instructor = req.user._id
+        console.log(instructor);
+        const { title, category, description, level, isPublished, price, discount, accessCode, accessCodeActive} = req.body
+         console.log(req.body);
         let image = "";
         if (req.file) {
             const result = await uploadToCloudinary({

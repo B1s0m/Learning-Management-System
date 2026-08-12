@@ -63,7 +63,7 @@ async function getAllLesson(req, res) {
 
     try {
         const course = req.params.couersid
-        //  console.log(course)
+         console.log(course)
         const AllLesson = await Lesson.find({ course })
         res.status(200).json(AllLesson);
     } catch (error) {

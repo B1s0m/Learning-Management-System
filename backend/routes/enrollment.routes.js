@@ -5,13 +5,13 @@ const verifyRole=require("../middleware/verifyRole")
 
 
 
-router.get("/enrollment",verifyToken,enrollment.getMyEnrollment)
+router.get("/enrollment",verifyToken,Enrollment.getMyEnrollment)
 
 
 
-router.delete("/enrollment/course/:Id",verifyToken,verifyRole.verifyAdmin,enrollment.getallEnrollmentCoures)
+router.delete("/enrollment/course/:id",verifyToken,Enrollment.getallEnrollmentCoures)
 
-router.delete("/enrollment/:Id",verifyToken,verifyRole.verifyAdmin,enrollment.deleteenrollmentById)
+router.delete("/enrollment/:id",verifyToken,Enrollment.deletEnrollmentById)
 
 
 

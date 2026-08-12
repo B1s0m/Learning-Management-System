@@ -23,7 +23,8 @@ async function creatCart(req, res) {
 
         const id = req.params.id
         const findCourse = await Course.findById(id)
-
+         console.log(findCourse)
+         console.log(id)
         if (!findCourse) {
             return res.status(404).json({
                 message: "Course not found",

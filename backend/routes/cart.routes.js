@@ -5,9 +5,10 @@ const {verifyAdmin, verifyInstructor,verifyStudent} = require("../middleware/ver
 
 router.get("/", verifyToken, getCartsByConditionsWithSelection)
 
-router.post("/:Id", verifyToken, verifyStudent, creatCart)
+router.post("/checkout", verifyToken, verifyStudent, checkoutCart)
 
-router.post("/", verifyToken, verifyStudent, checkoutCart)
+router.post("/add/:id", verifyToken, verifyStudent, creatCart)
+
 
 router.delete("/:courseId", verifyToken, verifyStudent, deleteCartById)
 

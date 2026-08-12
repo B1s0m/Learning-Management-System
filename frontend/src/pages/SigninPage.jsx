@@ -1,3 +1,6 @@
+/* eslint-disable no-redeclare */
+/* eslint-disable no-empty-pattern */
+/* eslint-disable no-unused-vars */
 // src/components/SignInForm/SignInForm.jsx
 
 import { useState, useContext } from 'react';

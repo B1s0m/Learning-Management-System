@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Route, Routes } from "react-router";
 import Navbar from "./components/Navbar";
@@ -12,7 +13,7 @@ import CorsesList from "./pages/CorsesList";
 import CorseDetails from "./pages/CorseDetails";
 import CartPage from "./pages/CartPage";
 import LessonsPage from "./pages/LessonsPage";
-import CreateCourse from "./pages/Course";
+import CreateCourse from "./pages/CreateCourse";
 
 import { useEffect } from "react";
 import { getCurrentUser, logout } from "./services/authService";

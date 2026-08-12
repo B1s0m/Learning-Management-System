@@ -14,6 +14,7 @@ const lessonRoutes=require("./routes/lesson.routes")
 const submissionRouters= require("./routes/submission.routers")
 const assignmentsRoutes=require("./routes/assignment.routes")
 const cartsRoutes = require("./routes/cart.routes")
+const EnrollmentRoutes =require("./routes/enrollment.routes")
 // Middleware
 app.use(
     cors({
@@ -34,6 +35,7 @@ app.use('/',categoriesRoutes)
 app.use('/',coursesRoutes)
 app.use('/',lessonRoutes)
 app.use('/',assignmentsRoutes)
+app.use('/',EnrollmentRoutes)
 
 
 
