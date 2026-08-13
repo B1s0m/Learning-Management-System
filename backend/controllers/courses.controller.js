@@ -7,9 +7,10 @@ const cloudinary = require("../config/cloudinary");
 async function createCourse(req, res) {
 
     try {
-        req.body.instructor = req.user._id
-        const { title, category, description, level, isPublished, price, discount, accessCode, accessCodeActive, instructor } = req.body
-
+        instructor = req.user._id
+        console.log(instructor);
+        const { title, category, description, level, isPublished, price, discount, accessCode, accessCodeActive} = req.body
+         console.log(req.body);
         let image = "";
         if (req.file) {
             const result = await uploadToCloudinary({
@@ -49,6 +50,21 @@ async function getAllCourse(req, res) {
 
 }
 
+
+async function getMyCourse(req, res) {
+
+    try {
+        // let {selections, ...filter} = req.query
+         const instructor=req.user._id
+        //  console.log(instructor)
+        const AllCourse = await Course.find({instructor})
+        res.status(200).json(AllCourse);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: error })
+    }
+
+}
 
 
 async function getCourseById(req, res) {
@@ -110,8 +126,11 @@ async function updateCourseById(req, res) {
         }
         // console.log(req.file);
 
-const {title, description, price, discount, level, category} = req.body
+const {title, description, price, discount, level, category, accessCode, accessCodeActive,isPublished} = req.body
         const updatedCourse = await Course.findByIdAndUpdate(req.params.id, {
+            accessCode,
+            accessCodeActive,
+            isPublished,
             title,
             description,
             price: Number(price),
@@ -152,6 +171,6 @@ async function deleteCourseById(req, res) {
 
 module.exports = {
 
-    createCourse, getAllCourse, getCourseById, deleteCourseById, updateCourseById
+    createCourse, getAllCourse, getCourseById, deleteCourseById, updateCourseById,getMyCourse
 
 }

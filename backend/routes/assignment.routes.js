@@ -9,7 +9,7 @@ router.get("/all/:courseid",verifyToken, assignment.getAllAssignment )
 
 router.get("/:id",verifyToken, assignment.getAssignmentById )
 
-router.get("lesson/:lessonId", verifyToken, assignment.getLessonAssignments)
+router.get("/lesson/:lessonId", verifyToken, assignment.getLessonAssignments)
 
 router.post("/lesson/:lessonid", upload.single("instructionsFile") , verifyToken ,verifyRole.verifyInstructor ,assignment.createAssignment )
 

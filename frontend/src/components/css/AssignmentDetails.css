@@ -1,0 +1,241 @@
+.assignment-details-page {
+  margin-left: 240px;
+  padding: 40px;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+/* Header */
+
+.assignment-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.assignment-label {
+  display: inline-block;
+  padding: 6px 12px;
+
+  background-color: #e0f2fe;
+  color: #0369a1;
+
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.assignment-header h1 {
+  margin: 10px 0 8px;
+  color: #1e293b;
+  font-size: 32px;
+}
+
+.due-date {
+  margin: 0;
+  color: #64748b;
+  font-size: 15px;
+}
+
+/* Owner buttons */
+
+.assignment-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.assignment-actions button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 7px;
+
+  color: white;
+
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-assignment-btn {
+  background-color: #f59e0b;
+}
+
+.edit-assignment-btn:hover {
+  background-color: #d97706;
+}
+
+.delete-assignment-btn {
+  background-color: #ef4444;
+}
+
+.delete-assignment-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Instructions */
+
+.instructions-card {
+  background-color: white;
+
+  padding: 25px;
+  border-radius: 12px;
+
+  border: 1px solid #e2e8f0;
+
+  margin-bottom: 30px;
+}
+
+.instructions-card h2 {
+  margin-top: 0;
+  color: #1e293b;
+}
+
+.instructions-card p {
+  color: #475569;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.instructions-file-btn {
+  display: inline-block;
+
+  margin-top: 15px;
+  padding: 10px 16px;
+
+  background-color: #0ea5e9;
+  color: white;
+
+  border-radius: 7px;
+  text-decoration: none;
+}
+
+.instructions-file-btn:hover {
+  background-color: #0284c7;
+}
+
+/* Questions */
+
+.questions-section {
+  margin-top: 20px;
+}
+
+.questions-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.questions-header h2 {
+  margin: 0;
+  color: #1e293b;
+}
+
+.questions-header span {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Question card */
+
+.question-card {
+  position: relative;
+
+  background-color: white;
+
+  padding: 25px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.question-number {
+  color: #0284c7;
+  font-size: 13px;
+  font-weight: 600;
+
+  margin-bottom: 10px;
+}
+
+.question-card h3 {
+  margin: 0 0 10px;
+
+  color: #1e293b;
+  font-size: 18px;
+}
+
+.question-type {
+  color: #64748b;
+  font-size: 13px;
+
+  margin-bottom: 18px;
+}
+
+/* Multiple choice */
+
+.question-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-item {
+  padding: 12px 15px;
+
+  background-color: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+
+  color: #334155;
+}
+
+.option-item span {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* Correct answer */
+
+.correct-answer {
+  margin-top: 18px;
+
+  padding: 12px 15px;
+
+  background-color: #dcfce7;
+  color: #166534;
+
+  border-radius: 7px;
+}
+
+/* Marks */
+
+.question-marks {
+  position: absolute;
+
+  top: 20px;
+  right: 20px;
+
+  background-color: #f1f5f9;
+  color: #475569;
+
+  padding: 5px 10px;
+  border-radius: 20px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.assignment-loading {
+  color: #64748b;
+  text-align: center;
+  margin-top: 100px;
+}

@@ -8,12 +8,15 @@ router.get("/courses",verifyToken,courses.getAllCourse)
 
 router.get("/courses/:id",verifyToken,courses.getCourseById)
 
+router.get("/courses/mycourses",verifyToken,verifyRole.verifyInstructor,courses.getMyCourse)
+
+
 /// only instructor
 router.post("/courses",  upload.single("image"),verifyToken,verifyRole.verifyInstructor,courses.createCourse)
 
 router.put("/courses/:id",upload.single("image"),verifyToken,verifyRole.verifyInstructor,courses.updateCourseById)
 
-router.delete("/courses/:id", verifyToken,verifyRole.verifyInstructor,courses.deleteCourseById)
+router.delete("/courses/:id", verifyToken,verifyRole.verifyInstructorOrAdimin,courses.deleteCourseById)
 
 
 

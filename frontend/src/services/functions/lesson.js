@@ -8,6 +8,25 @@ async function getAllLessons(courseId) {
         console.log(error)
     }
 }
+
+async function createLessons(courseId,body) {
+    try {
+        let createLesson = await api.post("/lesson/"+courseId,body)
+        return createLesson
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function updateLessonById(Id,body) {
+    try {
+        let updateLesson = await api.put("/lesson/"+Id,body)
+        return updateLesson
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 async function getLessonById(id) {
     try {
         let thisLesson = await api.get("/lesson/" + id)
@@ -27,6 +46,7 @@ async function deleteLessonById(id) {
 async function getAllAssignmentByLessonID(id) {
     try{
         let allAssignments = await api.get("/assignments/lesson/"+id)
+         console.log(allAssignments.data);
         return allAssignments
     }catch(error){
         console.log(error)
@@ -40,6 +60,16 @@ async function getAssignmentByID(id) {
         console.log(error)
     }
 }
+
+async function createAssignment(id,body) {
+    try{
+        let createdAssignment = await api.post("/assignments/lesson/"+id,body)
+        return createdAssignment.data
+    }catch(error){
+        console.log(error)
+    }
+}
+
 async function deleteAssignmentByID(id) {
     try{
         let toDeleteAssignment = await api.delete("/assignments/"+id)
@@ -55,5 +85,6 @@ export {
     deleteLessonById,
     getAllAssignmentByLessonID,
     getAssignmentByID,
-    deleteAssignmentByID
+    deleteAssignmentByID,
+    createLessons,updateLessonById ,createAssignment
 }
