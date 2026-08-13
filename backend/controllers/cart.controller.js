@@ -7,8 +7,21 @@ const Enrollment = require("../models/Enrollment");
 async function getCartsByConditionsWithSelection(req, res) {
     try {
         // ياخد السلكشن من الكويري ويخلي الباقي في أوبجكت  اسمه فلتر
-        let { selections, ...filter } = req.query
-        let conditionCarts = await Cart.find(filter).select(selections)
+        // let { selections, ...filter } = req.query
+        let conditionCarts = await Cart.findOne({ student: req.user._id })
+            .populate({
+                path: "items.course",
+                populate: [
+                    {
+                        path: "category",
+                        select: "name"
+                    },
+                    {
+                        path: "instructor",
+                        select: "username"
+                    }
+                ]
+            })
         res.status(200).json(conditionCarts)
     } catch (error) {
         console.log(error)
@@ -19,43 +32,52 @@ async function getCartsByConditionsWithSelection(req, res) {
 
 async function creatCart(req, res) {
     try {
+        const id = req.params.id;
 
+        const findCourse = await Course.findById(id);
 
-        const id = req.params.id
-        const findCourse = await Course.findById(id)
-         console.log(findCourse)
-         console.log(id)
         if (!findCourse) {
             return res.status(404).json({
                 message: "Course not found",
             });
         }
 
-        let hasCart = await Cart.findOne({ student: req.user._id })
+        let hasCart = await Cart.findOne({
+            student: req.user._id,
+        });
 
         if (!hasCart) {
-            let hasCart = await Cart.create({
+            hasCart = await Cart.create({
                 student: req.user._id,
-                items: []
-            })
-
-
-
-            hasCart.items.push({ course: id, price: findCourse.price })
-
-
-
-
-            await hasCart.save();
-
-
-
-            return res.status(201).json(hasCart)
-
+                items: [],
+            });
         }
+
+        const courseExists = hasCart.items.some(
+            (item) => item.course.toString() === id
+        );
+
+        if (courseExists) {
+            return res.status(400).json({
+                message: "Course already exists in cart",
+            });
+        }
+
+        hasCart.items.push({
+            course: id,
+            price: findCourse.price,
+        });
+
+        await hasCart.save();
+
+        return res.status(201).json(hasCart);
+
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: error })
+
+        res.status(500).json({
+            message: error.message,
+        });
     }
 }
 
@@ -129,9 +151,18 @@ async function deleteCartById(req, res) {
 
 async function deleteAllCart(req, res) {
     try {
-        const student = req.user._id
-        const deleteallCart = await Cart.findByIdAndDelete(student );
-        res.json(deleteallCart);
+        const student = req.user._id;
+
+        const deletedCart = await Cart.findOneAndDelete({
+            student: student,
+        });
+
+        if (!deletedCart) {
+            return res.status(404).json({
+                message: "Cart not found",
+            });
+        }
+        res.json(deletedCart);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error })

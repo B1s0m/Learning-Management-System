@@ -9,8 +9,8 @@ function coursesList() {
   async function loadAllCorses() {
     try {
       const Corses = await getAllCorses(
-        "",
-        "title category instructor price"
+        "isPublished=true",
+        "title category instructor price image"
       );
 
       setAllCorses(Corses.data);
@@ -26,66 +26,70 @@ function coursesList() {
   function handleDetails(id) {
     navigate("/corseDetails/" + id);
   }
-
-  return (
+        console.log(allCorses);
+   return (
     <div className="courses-page">
-
+      
       <div className="courses-header">
-        <div>
-          <h1>Courses</h1>
-          <p>Manage and view all courses</p>
-        </div>
+        <h1>Courses</h1>
+        <p>Browse and view all available courses</p>
       </div>
 
-      <div className="table-container">
-        <table className="courses-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Category</th>
-              <th>Instructor</th>
-              <th>Price</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+      <div className="courses-grid">
+        {allCorses.length > 0 ? (
+          allCorses.map((oneCorse) => (
+            <div className="course-card" key={oneCorse._id}>
 
-          <tbody>
-            {allCorses.length !== 0 ? (
-              allCorses.map((oneCorse) => (
-                <tr key={oneCorse._id}>
-                  <td>{oneCorse.title}</td>
+              {oneCorse.image ? (
+                <img
+                  src={oneCorse.image}
+                  alt={oneCorse.title}
+                  className="course-image"
+                />
+              ) : (
+                <div className="course-no-image">
+                  No Image
+                </div>
+              )}
 
-                  <td>
-                    <span className="category">
-                      {oneCorse.category?.name}
-                    </span>
-                  </td>
+              <div className="course-card-content">
 
-                  <td>{oneCorse.instructor?.username}</td>
+                <div className="course-card-header">
+                  <span className="course-category">
+                    {oneCorse.category?.name}
+                  </span>
+                </div>
 
-                  <td className="price">
+                <div className="course-card-body">
+
+                  <h2>{oneCorse.title}</h2>
+
+                  <p className="course-instructor">
+                    Instructor: {oneCorse.instructor?.username}
+                  </p>
+
+                  <p className="course-price">
                     ${oneCorse.price}
-                  </td>
+                  </p>
 
-                  <td>
-                    <button
-                      className="details-btn"
-                      onClick={() => handleDetails(oneCorse._id)}
-                    >
-                      More Details
-                    </button>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5" className="loading">
-                  Loading...
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                </div>
+
+       
+                <div className="course-actions">
+                  <button
+                    className="course-details-btn"
+                    onClick={() => handleDetails(oneCorse._id)}
+                  >
+                    More Details
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="courses-loading">Loading...</p>
+        )}
       </div>
 
     </div>

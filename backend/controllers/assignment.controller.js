@@ -29,8 +29,7 @@ async function createAssignment(req, res) {
         const {
             title,
             instructions,
-            dueDate
-            // questions     
+            dueDate     
         } = req.body
         const createdassignment = await Assignment.create({ title, instructions, dueDate, questions, lesson })
         res.status(201).json(createdassignment);

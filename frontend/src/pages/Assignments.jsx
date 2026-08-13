@@ -17,7 +17,7 @@ function Assignments() {
   }
 
   useEffect(() => {
-    loadAllLessons()
+    loadAllAssignments()
   }, [])
 
   function handleDetails(event) {
@@ -60,15 +60,5 @@ function Assignments() {
     </>
   )
 }
-/* 
 
-  return (
-    <>
-      
-    </>
-  )
-}
-
-export default Lessons
-*/
 export default Assignments

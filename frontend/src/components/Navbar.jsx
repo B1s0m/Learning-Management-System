@@ -12,13 +12,14 @@ function Navbar() {
         {user && user.role === "admin" ? (
           <>
             <Link to="/usersList">Users List</Link>
-            <Link to="/coursesList">Courses List</Link>
+            <Link to="/coursesList">📚 Courses List</Link>
             <Link to="/ctegoriesList">Categories</Link>
             <button onClick={logout}>Sign Out</button>
           </>
         ) : user && user.role === "student" ? (
           <>
-            <Link to="/myCourses">My Courses</Link>
+            <Link to="/coursesList">📚 Courses List</Link>
+            <Link to="/myCourses">📚 My Courses</Link>
             <Link to="/cart">🛒 Cart</Link>
             <button onClick={logout}>Sign Out</button>
           </>
@@ -32,7 +33,7 @@ function Navbar() {
           </>
         ) : (
           <>
-            <Link to="/coursesList">Courses List</Link>
+            <Link to="/coursesList">📚Courses List</Link>
             <Link to="/sign-up">Sign Up</Link>
             <Link to="/sign-in">Sign In</Link>
           </>

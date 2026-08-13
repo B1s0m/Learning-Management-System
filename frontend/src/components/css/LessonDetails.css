@@ -1,0 +1,315 @@
+.lesson-details-page {
+  margin-left: 240px;
+  padding: 40px;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+.lesson-details-header {
+  margin-bottom: 30px;
+}
+
+.lesson-details-header h1 {
+  margin: 10px 0;
+  font-size: 32px;
+  color: #1e293b;
+}
+
+.lesson-details-header p {
+  color: #64748b;
+}
+
+.lesson-course {
+  display: inline-block;
+  background-color: #e0f2fe;
+  color: #0369a1;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* Lesson content */
+
+.lesson-content-card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 25px;
+}
+
+.lesson-content-card h2 {
+  margin-top: 0;
+  color: #1e293b;
+}
+
+.lesson-content {
+  color: #475569;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+/* Resources */
+
+.lesson-resources {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.resource-card {
+  background-color: white;
+  padding: 20px 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.resource-card h3 {
+  margin: 0 0 5px;
+  color: #1e293b;
+}
+
+.resource-card p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.resource-btn {
+  text-decoration: none;
+  background-color: #0ea5e9;
+  color: white;
+
+  padding: 10px 16px;
+  border-radius: 7px;
+
+  font-size: 14px;
+}
+
+.resource-btn:hover {
+  background-color: #0284c7;
+}
+
+/* Owner actions */
+
+.lesson-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 12px;
+}
+
+.lesson-actions button {
+  border: none;
+  padding: 11px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-lesson-btn {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.edit-lesson-btn:hover {
+  background-color: #d97706;
+}
+
+.delete-lesson-btn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.delete-lesson-btn:hover {
+  background-color: #dc2626;
+}
+
+.lesson-video {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border: 1px solid #e2e8f0;
+}
+
+.lesson-video h2 {
+  margin-top: 0;
+  color: #1e293b;
+}
+
+.lesson-video video {
+  width: 100%;
+  max-height: 550px;
+  border-radius: 10px;
+  background-color: black;
+}
+
+.lesson-pdf {
+  background-color: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 25px;
+  border-radius: 12px;
+
+  border: 1px solid #e2e8f0;
+  margin-bottom: 25px;
+}
+
+.lesson-pdf h3 {
+  margin: 0 0 5px;
+  color: #1e293b;
+}
+
+.lesson-pdf p {
+  margin: 0;
+  color: #64748b;
+}
+
+.pdf-btn {
+  text-decoration: none;
+
+  background-color: #0ea5e9;
+  color: white;
+
+  padding: 10px 18px;
+  border-radius: 7px;
+}
+
+.pdf-btn:hover {
+  background-color: #0284c7;
+}
+.lesson-details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.lesson-header-info {
+  flex: 1;
+}
+
+.lesson-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.create-assignment-btn,
+.edit-lesson-btn,
+.delete-lesson-btn {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 7px;
+
+  color: white;
+  cursor: pointer;
+
+  font-size: 14px;
+}
+
+.create-assignment-btn {
+  background-color: #0ea5e9;
+}
+
+.create-assignment-btn:hover {
+  background-color: #0284c7;
+}
+
+.edit-lesson-btn {
+  background-color: #f59e0b;
+}
+
+.edit-lesson-btn:hover {
+  background-color: #d97706;
+}
+
+.delete-lesson-btn {
+  background-color: #ef4444;
+}
+
+.delete-lesson-btn:hover {
+  background-color: #dc2626;
+}
+.assignments-section {
+  margin-top: 30px;
+  background-color: white;
+  padding: 25px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.assignments-header {
+  margin-bottom: 20px;
+}
+
+.assignments-header h2 {
+  margin: 0 0 6px;
+  color: #1e293b;
+}
+
+.assignments-header p {
+  margin: 0;
+  color: #64748b;
+}
+
+.assignments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.assignment-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px;
+
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+}
+
+.assignment-info h3 {
+  margin: 0 0 7px;
+  color: #1e293b;
+}
+
+.assignment-info p {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.no-assignments {
+  color: #64748b;
+  padding: 15px 0;
+}
+.view-assignments-btn {
+  background-color: #1e293b;
+  color: white;
+
+  border: none;
+  border-radius: 7px;
+
+  padding: 11px 18px;
+
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.view-assignments-btn:hover {
+  background-color: #334155;
+}

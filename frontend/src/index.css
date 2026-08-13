@@ -44,12 +44,21 @@ nav a{
   font-size: 16px;
 
   transition: 0.3s;
+  
 }
 
 .sidebar-links a:hover {
   background-color: #334155;
   color: #38bdf8;
 }
+
+
+
+
+
+
+
+
 
 .sidebar-links button {
   margin-top: 20px;
@@ -70,7 +79,3 @@ nav a{
   background-color: #dc2626;
 }
 
-.main-content {
-  margin-left: 240px;
-  padding: 30px;
-}

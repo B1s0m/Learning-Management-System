@@ -2,9 +2,12 @@ import { useNavigate } from "react-router";
 import { getMyCorses, deleteCorseById } from "../services/functions/corses";
 import { useEffect, useState } from "react";
 import "../components/css/MyCourses.css";
+import { useAuth } from "../context/AuthContext";
+
 function MyCourses() {
   const [allCorses, setAllCorses] = useState([]);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   async function loadAllCorses() {
     try {
@@ -30,7 +33,9 @@ function MyCourses() {
     } catch (err) {
       console.log(err);
     }
-  }
+  }   const instructor=allCorses?.[0]?.instructor?._id
+    const isOwner = user && instructor && user._id === instructor;
+      //  console.log(instructor);
 
   return (
     <div className="my-courses-page">
@@ -43,12 +48,16 @@ function MyCourses() {
         {allCorses.length !== 0 ? (
           allCorses.map((oneCorse) => (
             <div className="course-card" key={oneCorse._id}>
-              {oneCorse.image && (
+              {oneCorse.image ? (
                 <img
                   src={oneCorse.image}
                   alt={oneCorse.title}
                   className="course-image"
                 />
+              ) : (
+                <div className="course-no-image">
+                  No Image
+                </div>
               )}
               <div className="course-card-header">
                 <span className="course-category">
@@ -66,14 +75,15 @@ function MyCourses() {
                 <p className="price">${oneCorse.price}</p>
               </div>
 
-              <div className="course-actions">
+               <div className="course-actions">
                 <button
                   className="lessons-btn"
                   onClick={() => handleShowLessons(oneCorse._id)}
                 >
                   View Lessons
                 </button>
-
+              {isOwner && <>
+             
                 <button
                   className="edit-btn"
                   onClick={() => navigate("/editCourse/"  + oneCorse._id)}
@@ -86,8 +96,9 @@ function MyCourses() {
                   onClick={() => handleDelete(oneCorse._id)}
                 >
                   Delete
-                </button>
-              </div>
+                </button>  
+                 </>}
+              </div> 
             </div>
           ))
         ) : (

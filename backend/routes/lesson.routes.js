@@ -10,7 +10,7 @@ router.get("/all/:courseId",verifyToken,lesson.getAllLesson)
 router.get("/:id",verifyToken,lesson.getLessonById)
 
 /// only instructor
-router.post("/:id",   upload.fields([
+router.post("/:couersid",   upload.fields([
     { name: "videoUrl", maxCount: 1 },
     { name: "pdfFile", maxCount: 1 },
   ]),verifyToken,verifyRole.verifyInstructor,lesson.createLesson)
